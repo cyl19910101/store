@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title test file input
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap-fileinput/css/fileinput.min.css' media="all" type="text/css")
+  body
+    .container
+      .row
+        .col-md-8
+          form(enctype='multipart/form-data')
+            .form-group
+              input#input-id(type='file', data-preview-file-type='text' multiple data-preview-file-icon="" name='photos')
+    script(src='/bower_components/jquery/dist/jquery.min.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/bower_components/bootstrap-fileinput/js/fileinput.min.js')
+    script(src='/bower_components/bootstrap-fileinput/js/fileinput_locale_zh.js')
+    script.
+      $(function () {
+        $("#input-id").fileinput({
+          language: "zh",
+          uploadUrl: "/api/v1/picture",
+          allowedFileExtensions: ["jpg", "jpeg", "png", "gif"],
+          maxFileSize: 5000,
+          previewSettings: {
+            image: {width: "auto", height: "160px"}
+          },
+          ajaxSettings: {
+            beforeSend: function (xhr) {
+              if (localStorage.getItem('token')) {
+                xhr.setRequestHeader('Authorization',
+                        'Bearer ' + localStorage.getItem('token'));
+              }
+            }
+          }
+        });
+      });

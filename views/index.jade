@@ -1,0 +1,12 @@
+extends layout
+block stylesheets
+  link(rel='stylesheet', href='/stylesheets/index.css')
+block content
+  .container.mainContent
+    .panel.panel-info
+      .panel-heading 所有商品
+      .panel-body
+        .row#goods
+block javascript
+  script(data-main="javascripts/index" src="javascripts/lib/require.js")
+  //script(src='/javascripts/index.js')

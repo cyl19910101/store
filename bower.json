@@ -1,0 +1,28 @@
+{
+  "name": "store",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cyl19910101/store",
+  "authors": [
+    "ChenYanliang <chenyanliang19910101@gmail.com>"
+  ],
+  "description": "store",
+  "keywords": [
+    "store"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "bootstrap-offcanvas": "~1.4.2",
+    "bootstrap-fileinput": "4.2.5",
+    "moment": "~2.10.6",
+    "validator-js": "~4.0.5"
+  }
+}

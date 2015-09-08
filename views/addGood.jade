@@ -1,0 +1,72 @@
+#createGoodForm
+  .row
+    .col-md-12
+      form
+        label 商品图片
+        form(enctype='multipart/form-data')
+          .form-group
+            input#input-id(type='file', data-preview-file-type='text' multiple data-preview-file-icon="" name='photos')
+      .col-md-4
+        label 商品名
+        input.form-control(type='text', placeholder='商品名' name='name' autofocus required)
+      .col-md-4
+        label 基准价格
+        input.form-control(type='number', placeholder='基准价格' step='0.01'  name='buyPrice' required)
+      .col-md-4
+        label 库存
+        input.form-control(type='number', min="0" max="20000" placeholder='库存' name='stock')
+      .col-md-4
+        label 标签
+        .input-group
+          input.form-control#tagInput(type='text', placeholder='请输入商品标签，便于用户搜索商品，每输入一个标签后请点击右边的添加键')
+          span.input-group-btn
+            button.btn.btn-default#insertTagBtn
+              span.glyphicon.glyphicon-plus-sign
+      .col-md-4
+        div
+          label 已添加标签(点击标签可删除)
+        #currentLabel
+      .col-md-4
+        div
+          label 分类
+        .btn-group
+          button.btn.btn-default(type='button') 食品
+          button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            span.caret
+            span.sr-only Toggle Dropdown
+          ul.dropdown-menu
+            li
+              a(href='#') 未添加
+      .col-md-4
+        label 重量(kg)--暂缓开放，先商量怎么使用
+        input.form-control(type='number',step='0.01' placeholder='重量' name='weight')
+      .col-md-4
+        label 体积--暂缓开放，先商量怎么使用
+        input.form-control(type='number',step='0.01' placeholder='体积' name='volume')
+      .col-md-4
+        div
+          label 邮寄方式--暂缓开放，先商量怎么使用
+        .btn-group
+          button.btn.btn-default(type='button') 普通航运
+          button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            span.caret
+            span.sr-only Toggle Dropdown
+          ul.dropdown-menu
+            li
+              a(href='#') 未添加
+      .col-md-12
+        label 商品编码
+        input.form-control(type='number' name='code')
+      .col-md-12
+        label 商品简介
+        input.form-control(type='text' name='brief')
+      .col-md-12
+        label 商品描述
+        textarea.form-control(rows='5' name='description')
+        br
+      .col-md-12
+        a.btn.btn-success.btn-block 添加商品
+        input.btn.btn-success.btn-block(type='submit' value='添加商品')
+        br
+      .col-md-12
+        p 商品上传接口，输入的商品名称和简介将在商品预览框中显示，请使用纯文本描述商品，以后再根据需要添加富文本展示页面

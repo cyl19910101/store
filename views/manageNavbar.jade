@@ -1,0 +1,38 @@
+button.navbar-toggle.offcanvas-toggle(type='button', data-toggle='offcanvas', data-target='#js-bootstrap-offcanvas', style='float:left;')
+  span.sr-only Toggle navigation
+  span.icon-bar
+  span.icon-bar
+  span.icon-bar
+nav#js-bootstrap-offcanvas.navbar.navbar-default.navbar-offcanvas.navbar-offcanvas-fade(role='navigation')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.offcanvas-toggle.pull-right(type='button', data-toggle='offcanvas', data-target='#js-bootstrap-offcanvas', style='float:left;')
+        span.sr-only Toggle navigation
+        i.glyphicon.glyphicon-remove
+    div
+      ul.nav.navbar-nav
+        li
+          a(href='#') 商品管理
+        li
+          a(href='#') 订单管理
+        li.dropdown
+          a.dropdown-toggle(href='#')
+            | 用户管理
+            span.caret
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='#') Action
+            li
+              a(href='#') Another action
+            li
+              a(href='#') Something else here
+            li.divider
+            li
+              a(href='#') Separated link
+            li.divider
+            li
+              a(href='#') One more separated link
+      form.navbar-form.navbar-left(role='search')
+        .form-group
+          input.form-control(type='text', placeholder='Search')
+        button.btn.btn-default(type='submit') Submit
