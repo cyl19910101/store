@@ -46,51 +46,37 @@ define(function (require) {
     var register = function () {
     };
 
+    var checkPasswordMatch = function () {
+        var password        = $('#inputPassword').val();
+        var confirmPassword = $('#inputConfirmPassword').val();
+        if(password !== confirmPassword) {
+            $('#inputConfirmPassword')[0].setCustomValidity('输入的密码不匹配');
+            return false;
+        }
+        $('#inputConfirmPassword')[0].setCustomValidity('');
+        return true;
+    };
+
     var getUserDataFromInput = function () {
-        //username : undefined,
-        //    name     : undefined,
-        //    pwd      : undefined,
-        //    status   : undefined,
-        //    email    : undefined,
-        //    level    : undefined,
-        //    //role     :undefined,
-        //    phone    : undefined,
-        //    //the three below is array
-        //    addresses: undefined,
-        //    cart     : undefined,
-        //    orders   : undefined
-        var username        = $('#inputUsername').val();
-        var basicPrice  = $('#inputPassword').val();
-        var stock       = $('#inputConfirmPassword').val();
-        var brief       = $('#inputEmail').val();
-        //
-        //good.name        = name;
-        //good.basicPrice  = basicPrice;
-        //good.stock       = stock;
-        //good.brief       = brief;
-        //good.description = description;
-        //good.code        = code || new Date().getTime();
-        //good.images      = objectKey.getObjectKeys(imageList);
-        //good.tags        = objectKey.getObjectKeys(goodTags);
-        //input#inputUsername.form-control(type='text', placeholder='用户名', required autofocus)
-        //label.sr-only(for='inputPassword')
-        //    input#inputPassword.form-control(type='password', placeholder='密码', required)
-        //label.sr-only(for='inputConfirmPassword')
-        //    input#inputConfirmPassword.form-control(type='password', placeholder='confirm密码', required)
-        //label.sr-only(for='inputEmail')
-        //    input#inputEmail.form-control(type='email', placeholder='email, required & can not be changed', required)
+        var username = $('#inputUsername').val();
+        var name     = $('#inputConfirmPassword').val();
+        var password = $('#inputPassword').val();
+        var email    = $('#inputEmail').val();
     };
 
     var initUI = function () {
 
         $('#loginBtn').click(login);
 
+        //bind confirm password handler
+        $('#inputUsername').change(checkPasswordMatch);
+        $('#inputConfirmPassword').change(checkPasswordMatch);
+
         //bind register btn
         //unbind default submit event
         //post to server
-        $('#registerBtn').on('submit', function (e) {
+        $('#registerForm').on('submit', function (e) {
             e.preventDefault();
-            register();
         });
     };
 

@@ -18,47 +18,18 @@ block content
                     h2.form-signin-heading 注册
                     label.sr-only(for='inputUsername')
                     input#inputUsername.form-control(type='text', placeholder='用户名', required autofocus)
+                    label.sr-only(for='inputName')
+                    input#inputName.form-control(type='text', placeholder="姓名" )
                     label.sr-only(for='inputPassword')
                     input#inputPassword.form-control(type='password', placeholder='密码', required)
                     label.sr-only(for='inputConfirmPassword')
-                    input#inputConfirmPassword.form-control(type='password', placeholder='confirm密码', required)
+                    input#inputConfirmPassword.form-control(type='password', placeholder='确认密码', required)
                     label.sr-only(for='inputEmail')
-                    input#inputEmail.form-control(type='email', placeholder='email, required & can not be changed', required)
-                    //.checkbox
-                    //  label
-                    //    input(type='checkbox', value='remember-me')
-                    //    |  保持登录
-                    //label.sr-only(for='submitBtn')
-                    a.btn.btn-primary.btn-lg.btn-block#registerBtn 注册
+                    input#inputEmail.form-control(type='邮箱', placeholder='电子邮箱，注册后不可更改', required)
+                    label.sr-only(for='registerBtn')
+                    button.btn.btn-primary.btn-lg.btn-block#registerBtn(type="submit") 注册
                     //input#submitBtn.btn.btn-lg.btn-primary.btn-block(type='submit' value="注册")
                     p 已有帐号?
                         a(href='/account') 转至登录
 block javascript
-    //script.
-    //    $(function () {
-    //        if (isAuthenticated()) {
-    //            window.location.href = '/';
-    //        }
-    //        $('#registerForm').on('submit', function (e) {
-    //            e.preventDefault();
-    //            //get val
-    //
-    //            //validate val
-    //
-    //            $.ajax({
-    //                url    : '/api/v1/user',
-    //                method : 'POST',
-    //                success: function (res) {
-    //                    if (res.success) {
-    //
-    //                    } else {
-    //
-    //                    }
-    //                },
-    //                error  : function (res) {
-    //                    console.log(res);
-    //                }
-    //            });
-    //        })
-    //    });
-    script(data-main="javascripts/account" src="javascripts/require.js")
+    script(data-main="javascripts/account" src="javascripts/lib/require.js")
