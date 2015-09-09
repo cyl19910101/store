@@ -1,3 +1,3 @@
 require(['./common'], function (common) {
-  require(['app/test']);
+    require(['app/test']);
 });

@@ -1,25 +1,21 @@
 extends layout
 block preprocess
-  script.
-    if (!authorization.isAuthenticated() || authorization.getTokenUser() !== 'admin') {
-      window.location.href = '/';
-    }
+    script.
+        if (!authorization.isAuthenticated() || authorization.getTokenUser() !== 'admin') {
+            window.location.href = '/';
+        }
 block stylesheets
-  link(rel='stylesheet', href='/stylesheets/manage.css')
-  link(rel='stylesheet', href='/bower_components/bootstrap-offcanvas/dist/css/bootstrap.offcanvas.min.css')
-  link(rel='stylesheet', href='/bower_components/bootstrap-fileinput/css/fileinput.min.css' media="all" type="text/css")
+    link(rel='stylesheet', href='/stylesheets/manage.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap-offcanvas/dist/css/bootstrap.offcanvas.min.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap-fileinput/css/fileinput.min.css' media="all" type="text/css")
 block content
-  .clearfix.navbar.navbar-fixed-top(style='margin-top: 50px;')
-    include manageNavbar
-  .container.managePanel.box
-    h1 广告占位
-    include addGood
-    hr
-    #manageGoodForm
-      p 选择商品进行管理
+    .clearfix.navbar.navbar-fixed-top(style='margin-top: 50px;')
+        include manageNavbar
+    .container.managePanel.box
+        h1 广告占位
+        include addGood
+        hr
+        #manageGoodForm
+            p 选择商品进行管理
 block javascript
-  script(data-main="javascripts/manage" src="javascripts/lib/require.js")
-  //script(src='/javascripts/manage.js')
-  //script(src='/bower_components/bootstrap-offcanvas/dist/js/bootstrap.offcanvas.min.js')
-  //script(src='/bower_components/bootstrap-fileinput/js/fileinput.min.js')
-  //script(src='/bower_components/bootstrap-fileinput/js/fileinput_locale_zh.js')
+    script(data-main="javascripts/manage" src="javascripts/lib/require.js")

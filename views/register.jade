@@ -1,76 +1,64 @@
 extends layout
-block stylesheets
-  link(rel='stylesheet', href='/stylesheets/account.css')
-block content
-  .container.mainContent
-    .row
-      // TODO: lg-desktop show logo
-      //.col-sm-5.col-md-6.logo
-      //    img.logo(src='/images/logo.jpeg')
-      //    h3 买真品，买放心货。
-      .col-md-6
-        form.form-signin#registerForm(method='post')
-          h2.form-signin-heading register
-          label.sr-only(for='inputUsername')
-          input#inputUsername.form-control(type='text', placeholder='用户名', required autofocus)
-          label.sr-only(for='inputPassword')
-          input#inputPassword.form-control(type='password', placeholder='密码', required)
-          label.sr-only(for='inputConfirmPassword')
-          input#inputConfirmPassword.form-control(type='password', placeholder='confirm密码', required)
-          label.sr-only(for='inputEmail')
-          input#inputEmail.form-control(type='email', placeholder='email, required & can not be changed', required)
-          //.checkbox
-          //  label
-          //    input(type='checkbox', value='remember-me')
-          //    |  保持登录
-          //label.sr-only(for='submitBtn')
-          input#submitBtn.btn.btn-lg.btn-primary.btn-block(type='submit' value="注册")
-          p have an account already?
-            a(href='/account') login
-block javascript
-  script.
-    $(function () {
-      if (isAuthenticated()) {
-        window.location.href = '/';
-      }
-      $('#registerForm').on('submit', function (e) {
-        e.preventDefault();
-        //get val
-
-        //validate val
-
-        $.ajax({
-          url: '/api/v1/user',
-          method: 'POST',
-          success: function (res) {
-            if (res.success) {
-
-            } else {
-
-            }
-          },
-          error: function (res) {
-            console.log(res);
-          }
-        });
-      })
-    });
-  script(src='/javascripts/sha256.js')
-  script(data-main="javascripts/account" src="javascripts/require.js")
-  //script(src='/javascripts/login.js')
-  script.
-    $(function () {
-      if (isAuthenticated()) {
-        window.location.href = '/';
-      }
-    });
-    $(document).ready(function () {
-      $.ajaxSetup({
-        'beforeSend': function (xhr) {
-          if (localStorage.getItem('token')) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'))
-          }
+block preprocess
+    script.
+        if (authorization.isAuthenticated()) {
+            window.location.href = '/';
         }
-      })
-
-    });
+block stylesheets
+    link(rel='stylesheet', href='/stylesheets/account.css')
+block content
+    .container.mainContent
+        .row
+            // TODO: lg-desktop show logo
+            //.col-sm-5.col-md-6.logo
+            //    img.logo(src='/images/logo.jpeg')
+            //    h3 买真品，买放心货。
+            .col-md-6
+                form.form-signin#registerForm
+                    h2.form-signin-heading 注册
+                    label.sr-only(for='inputUsername')
+                    input#inputUsername.form-control(type='text', placeholder='用户名', required autofocus)
+                    label.sr-only(for='inputPassword')
+                    input#inputPassword.form-control(type='password', placeholder='密码', required)
+                    label.sr-only(for='inputConfirmPassword')
+                    input#inputConfirmPassword.form-control(type='password', placeholder='confirm密码', required)
+                    label.sr-only(for='inputEmail')
+                    input#inputEmail.form-control(type='email', placeholder='email, required & can not be changed', required)
+                    //.checkbox
+                    //  label
+                    //    input(type='checkbox', value='remember-me')
+                    //    |  保持登录
+                    //label.sr-only(for='submitBtn')
+                    a.btn.btn-primary.btn-lg.btn-block#registerBtn 注册
+                    //input#submitBtn.btn.btn-lg.btn-primary.btn-block(type='submit' value="注册")
+                    p 已有帐号?
+                        a(href='/account') 转至登录
+block javascript
+    //script.
+    //    $(function () {
+    //        if (isAuthenticated()) {
+    //            window.location.href = '/';
+    //        }
+    //        $('#registerForm').on('submit', function (e) {
+    //            e.preventDefault();
+    //            //get val
+    //
+    //            //validate val
+    //
+    //            $.ajax({
+    //                url    : '/api/v1/user',
+    //                method : 'POST',
+    //                success: function (res) {
+    //                    if (res.success) {
+    //
+    //                    } else {
+    //
+    //                    }
+    //                },
+    //                error  : function (res) {
+    //                    console.log(res);
+    //                }
+    //            });
+    //        })
+    //    });
+    script(data-main="javascripts/account" src="javascripts/require.js")

@@ -1,4 +1,9 @@
 extends layout
+block preprocess
+    script.
+        if (authorization.isAuthenticated()) {
+            window.location.href = '/';
+        }
 block stylesheets
   link(rel='stylesheet', href='/stylesheets/account.css')
 block content
@@ -20,7 +25,7 @@ block content
               input(type='checkbox', value='remember-me')
               |  保持登录
           a#loginBtn.btn.btn-lg.btn-primary.btn-block 登录
-          p don't have an account?
-            a(href='/register') register
+          p 没有帐号?
+            a(href='/register') 转至注册
 block javascript
   script(data-main="javascripts/account" src="javascripts/lib/require.js")

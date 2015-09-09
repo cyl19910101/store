@@ -22,7 +22,6 @@
     "bootstrap": "~3.3.5",
     "bootstrap-offcanvas": "~1.4.2",
     "bootstrap-fileinput": "4.2.5",
-    "moment": "~2.10.6",
     "validator-js": "~4.0.5"
   }
 }

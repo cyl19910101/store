@@ -6,6 +6,7 @@ var tokenController = require('./api/v1/token');
 var pictureController = require('./api/v1/picture');
 var goodController = require('./api/v1/good');
 var finanseController = require('./api/v1/finanse');
+var userController = require('./api/v1/user');
 var secret = tokenController.secretKey;
 var _ejwt = expressJwt({secret: secret});
 
@@ -26,4 +27,10 @@ router.post('/good', _ejwt, goodController.postGood);
 
 router.get('/RMBExchangeRate', _ejwt, finanseController.getRMBExchangeRate);
 // END good operation
+
+/**
+ * user operation
+ */
+//post user -- register
+router.post('/user',userController.postUser);
 module.exports = router;

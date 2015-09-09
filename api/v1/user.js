@@ -8,12 +8,12 @@ exports.getUser = function (req, res, next) {
 };
 
 exports.postUser = function (req, res, next) {
-    if(req.user) {
-        if(req.user.username !== 'admin') {
+    if (req.user) {
+        if (req.user.username !== 'admin') {
             res.send(401);
         }
         else {
-            //TODO: admin post a user, not really need
+            //TODO: admin post a user, not really necessary
         }
     } else {
         //post user
@@ -28,6 +28,6 @@ exports.postUser = function (req, res, next) {
         //debug
         var _user = req.body;
         console.log(_user);
-        res.send({success:"success to post a user"});
+        res.send({success: "success to post a user"});
     }
 };
