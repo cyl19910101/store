@@ -1,38 +1,87 @@
 doctype html
 html
-  head
-    title test file input
-    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/bower_components/bootstrap-fileinput/css/fileinput.min.css' media="all" type="text/css")
-  body
-    .container
-      .row
-        .col-md-8
-          form(enctype='multipart/form-data')
-            .form-group
-              input#input-id(type='file', data-preview-file-type='text' multiple data-preview-file-icon="" name='photos')
-    script(src='/bower_components/jquery/dist/jquery.min.js')
-    script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
-    script(src='/bower_components/bootstrap-fileinput/js/fileinput.min.js')
-    script(src='/bower_components/bootstrap-fileinput/js/fileinput_locale_zh.js')
-    script.
-      $(function () {
-        $("#input-id").fileinput({
-          language: "zh",
-          uploadUrl: "/api/v1/picture",
-          allowedFileExtensions: ["jpg", "jpeg", "png", "gif"],
-          maxFileSize: 5000,
-          previewSettings: {
-            image: {width: "auto", height: "160px"}
-          },
-          ajaxSettings: {
-            beforeSend: function (xhr) {
-              if (localStorage.getItem('token')) {
-                xhr.setRequestHeader('Authorization',
-                        'Bearer ' + localStorage.getItem('token'));
-              }
-            }
-          }
-        });
-      });
+    head
+        title test form ui
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(charset="UTF-8")
+        link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css")
+    body
+        .container(style="margin-top:20px")
+            form.form-horizontal
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label(for="goodNameInput") 商品名
+                    .col-sm-10.col-md-9
+                        input.form-control#goodNameInput(type="text", placeholder="商品名" name="name" autofocus required)
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label(for="goodBasicPriceInput") 基准价格
+                    .col-sm-10.col-md-9
+                        input.form-control#goodBasicPriceInput(type="number", placeholder="基准价格" step="0.01"  name="buyPrice" required)
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label(for="goodStockInput") 库存
+                    .col-sm-10.col-md-9
+                        input.form-control#goodStockInput(type="number", min="0" max="20000" placeholder="库存" name="stock")
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label 重量(kg)
+                    .col-sm-10.col-md-9
+                        input.form-control(type="number",step="0.01" placeholder="重量" name="weight")
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label 体积
+                    .col-sm-10.col-md-9
+                        input.form-control(type="number",step="0.01" placeholder="体积" name="volume")
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label 商品编码
+                    .col-sm-10.col-md-9
+                        input.form-control(type="number" name="code")
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label 分类
+                    .col-sm-10.col-md-9
+                        .btn-group
+                            button.btn.btn-default(type="button") 食品
+                            button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                                span.caret
+                                span.sr-only Toggle Dropdown
+                            ul.dropdown-menu
+                                li
+                                    a(href="#") 未添加
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    div
+                        label.col-sm-2.col-md-3.control-label 邮寄方式
+                    .col-sm-10.col-md-9
+                        .btn-group
+                            button.btn.btn-default(type="button") 普通航运
+                            button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                                span.caret
+                                span.sr-only Toggle Dropdown
+                            ul.dropdown-menu
+                                li
+                                    a(href="#") 未添加
+                .form-group.col-sm-12.col-md-6.col-lg-4
+                    label.col-sm-2.col-md-3.control-label 标签
+                    .col-sm-10.col-md-9
+                        .input-group
+                            input.form-control#tagInput(type="text", placeholder="请输入商品标签，便于用户搜索商品，每输入一个标签后请点击右边的添加键")
+                            span.input-group-btn
+                                a.btn.btn-default#insertTagBtn
+                                    span.glyphicon.glyphicon-plus-sign
+                .col-xs-12
+                    .panel.panel-default
+                        .panel-heading 已添加标签(点击标签可删除)
+                        .panel-body#currentLabel
+                .col-md-12
+                    label 商品简介
+                    input.form-control(type="text" name="brief")
+                .col-md-12
+                    label 商品描述
+                    textarea.form-control(rows="5" name="description")
+                    br
+                button.btn.btn-default.btn-lg.btn-block(type="submit") submit
+        script(src="/bower_components/jquery/dist/jquery.min.js")
+        script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js")
+        script.
+            $(function () {
+                $('form').on('submit', function (e) {
+                    e.preventDefault();
+                    console.log('not submit');
+                });
+            });
