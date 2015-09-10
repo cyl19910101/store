@@ -31,7 +31,8 @@ define(function (require) {
                         xhr.setRequestHeader('Authorization',
                             'Bearer ' + localStorage.getItem('token'));
                     }
-                }
+                },
+                method    : 'DELETE'
             }
         });
 
