@@ -9,7 +9,7 @@ define({
     email    : undefined,
     level    : undefined,
     birthday : undefined,
-    //role     :undefined,
+    role     : undefined,
     phone    : undefined,
     //the three below is array
     addresses: undefined,

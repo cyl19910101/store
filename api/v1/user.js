@@ -25,9 +25,22 @@ exports.postUser = function (req, res, next) {
          *      if failed, tell res the reason
          */
 
-        //debug
         var _user = req.body;
-        console.log(_user);
-        res.send({success: "success to post a user"});
+
+        // init user data
+        _user.status = 'deactivate';
+        _user.level  = 1;
+        _user.role   = 'customer';
+
+        var user = new User(_user);
+        user.save(function (err) {
+            //TODO : handle err and tell client what's wrong
+            if (err) {
+                console.log(err);
+                res.send({error: err})
+            }
+            else res.send({success: "success to post a user"});
+        })
+
     }
 };

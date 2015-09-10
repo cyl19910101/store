@@ -12,6 +12,7 @@ require.config({
         _BS_OFF         : '../bower_components/bootstrap-offcanvas/dist/js/bootstrap.offcanvas.min',
         _BS_FI_INPUT    : '../bower_components/bootstrap-fileinput/js/fileinput.min',
         _BS_FI_INPUT_LAN: '../bower_components/bootstrap-fileinput/js/fileinput_locale_zh',
-        validator       : '../bower_components/validator-js/validator.min'
+        validator       : '../bower_components/validator-js/validator.min',
+        _va             : '../javascripts/lib/validatorExtension'
     }
 });

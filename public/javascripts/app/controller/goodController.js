@@ -2,7 +2,7 @@ define(function (require) {
     var $         = require('jquery');
     var good      = require('app/model/good');
     var objectKey = require('app/util/objectKey');
-    var _va       = require('validator');
+    var _va       = require('_va');
     var _g        = function () {
     };
 
@@ -99,7 +99,7 @@ define(function (require) {
     var postGoodData = function (o) {
         $.ajax({
             url        : '/api/v1/good',
-            method     : "POST",
+            method     : 'POST',
             data       : JSON.stringify(good),
             contentType: 'application/json; charset=utf-8',
             dataType   : 'json',

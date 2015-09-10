@@ -1,5 +1,5 @@
 var Good      = require('../../models').Good;
-var User = require('../../models').User;
+var User      = require('../../models').User;
 var validator = require('validator');
 
 var isAValidGoodData = function (good, invalidInfo) {
@@ -63,9 +63,9 @@ exports.getGood = function (req, res, next) {
     if (req.user) {
         var username = user.username;
         //1st. get user's level
-        User.findOne({username:username}, function(err, data) {
+        User.findOne({username: username}, function (err, data) {
             //debug
-           console.log(data);
+            console.log(data);
         })
 
         //2nd. get good data from database
