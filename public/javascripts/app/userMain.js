@@ -1,8 +1,8 @@
 define(function (require) {
     require('app/controller/sharedContentController');
-    var accountController = require('app/controller/accountController');
+    var userController = require('app/controller/userController');
     var $                 = require('jquery');
     $(function () {
-        accountController.initUI();
+        userController.initUI();
     });
 })

@@ -1,0 +1,12 @@
+extends layout
+block preprocess
+    script.
+        if (!authorization.isAuthenticated()) {
+            window.location.href = '/authorization';
+        }
+block content
+    h1 TODO
+    h1 TODO
+    h1 TODO
+block javascript
+    script(data-main="javascripts/user" src="javascripts/lib/require.js")

@@ -1,102 +1,124 @@
 doctype html
 html
-  head
-    title 澳品居代购商城
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(charset='UTF-8')
-    script.
-      //proprocess authorization
-      var authorization = (function () {
-        var isAuthenticated = function () {
-          //TODO: complete this check
-          return localStorage.getItem('token') !== null;
-        };
-        var url_base64_decode = function (str) {
-          var output = str.replace('-', '+').replace('_', '/');
-          switch (output.length % 4) {
-            case 0:
-              break;
-            case 2:
-              output += '==';
-              break;
-            case 3:
-              output += '=';
-              break;
-            default:
-              throw 'Illegal base64url string!';
-          }
-          return window.atob(output);
-        }
-        var getTokenUser = function () {
-          var token = localStorage.getItem('token');
-          var encodedProfile = token.split('.')[1];
-          var profile = JSON.parse(url_base64_decode(encodedProfile));
-          return profile.username;
-        }
-        var decodeJWT = function (str) {
-          return decodeURIComponent(escape(window.atob(str)));
-        }
+    head
+        title 澳品居代购商城
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(charset='UTF-8')
+        script.
+            //proprocess authorization
+            var authorization = (function () {
+                var isAuthenticated   = function () {
+                    //TODO: complete this check
+                    return localStorage.getItem('token') !== null;
+                };
+                var url_base64_decode = function (str) {
+                    var output = str.replace('-', '+').replace('_', '/');
+                    switch (output.length % 4) {
+                        case 0:
+                            break;
+                        case 2:
+                            output += '==';
+                            break;
+                        case 3:
+                            output += '=';
+                            break;
+                        default:
+                            throw 'Illegal base64url string!';
+                    }
+                    return window.atob(output);
+                }
+                var getProfile        = function () {
+                    var token = localStorage.getItem('token');
+                    if (token) {
+                        var encodedProfile = token.split('.')[1];
+                        var profile        = JSON.parse(url_base64_decode(encodedProfile));
+                        return profile;
+                    } else {
+                        return undefined;
+                    }
+                };
 
-        var getPayload = function (token) {
-          var parts = token.split('.');
-          return decodeJWT(parts[1]);
-        }
+                var getTokenUser = function () {
+                    var profile = getPayload();
+                    if (profile)
+                        return getProfile().username;
+                    else return undefined;
+                };
 
-        var getExpTime = function (payload) {
-          return JSON.parse(payload).exp;
-        }
+                var getTokenRole = function () {
+                    var profile = getPayload();
+                    if (profile)
+                        return getProfile().role;
+                    else return undefined;
+                };
 
-        var isTokenExp = function (token) {
-          var payload = getPayload(token);
-          var expTime = getExpTime(payload);
-          var time = new Date().getTime();
-          if (Math.floor(time / 1000) > expTime) return true;
-          else return false;
-        }
+                var decodeJWT = function (str) {
+                    return decodeURIComponent(escape(window.atob(str)));
+                }
 
-        var configToken = function () {
-          var token = localStorage.getItem('token');
-          //TODO valid data
-          if (token) {
-            if (isTokenExp(token)) {
-              localStorage.removeItem('token');
+                var getPayload = function () {
+                    var token = localStorage.getItem('token');
+                    var parts = token.split('.');
+                    return decodeJWT(parts[1]);
+                }
+
+                var getExpTime = function (payload) {
+                    return JSON.parse(payload).exp;
+                }
+
+                var isTokenExp = function () {
+                    var token   = localStorage.getItem('token');
+                    var payload = getPayload(token);
+                    var expTime = getExpTime(payload);
+                    var time    = new Date().getTime();
+                    if (Math.floor(time / 1000) > expTime) return true;
+                    else return false;
+                }
+
+                var configToken          = function () {
+                    var token = localStorage.getItem('token');
+                    //TODO valid data
+                    if (token) {
+                        if (isTokenExp(token)) {
+                            localStorage.removeItem('token');
+                        }
+                    }
+                };
+                var _authorization       = function () {
+                };
+                _authorization.prototype = {
+                    isAuthenticated: isAuthenticated,
+                    getTokenUser   : getTokenUser,
+                    configToken    : configToken,
+                    getTokenRole   : getTokenRole
+                }
+                return new _authorization();
+            })();
+            authorization.configToken();
+        block preprocess
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/stylesheets/layout.css')
+        style.
+            body {
+                background-color : #efeff3;
             }
-          }
-        };
-        var _authorization = function () {
-        };
-        _authorization.prototype = {
-          isAuthenticated: isAuthenticated,
-          getTokenUser: getTokenUser,
-          configToken: configToken
-        }
-        return new _authorization();
-      })();
-      authorization.configToken();
-    block preprocess
-    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/stylesheets/layout.css')
-    style.
-      body {
-        background-color: #efeff3;
-      }
-    block stylesheets
-  body
-    header.navbar.navbar-default.navbar-fixed-top(name='navbar')
-      .container
-        .row
-          div.col-xs-2.col-sm-1
-            .navbar-header
-              a.navbar-brand(href='/')
-                span.glyphicon.glyphicon-home
-          .col-xs-7.col-md-9
-            .row.searchForm
-              .input-group
-                input.form-control(type='text', placeholder='贝拉美')
-                span.input-group-btn
-                  button.btn.btn-default(type='submit')
-                    span.glyphicon.glyphicon-search
-          div#accountArea
-    block content
-    block javascript
+        block stylesheets
+    body
+        header.navbar.navbar-default.navbar-fixed-top(name='navbar')
+            .container
+                .row
+                    div.col-xs-2.col-sm-1
+                        .navbar-header
+                            a.navbar-brand(href='/')
+                                span.glyphicon.glyphicon-home
+                    .col-xs-7.col-md-9
+                        .row.searchForm
+                            .input-group
+                                input.form-control(type='text', placeholder='贝拉美')
+                                span.input-group-btn
+                                    button.btn.btn-default(type='submit')
+                                        span.glyphicon.glyphicon-search
+                    div#accountArea
+        block content
+        block javascript

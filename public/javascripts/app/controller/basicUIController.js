@@ -1,8 +1,8 @@
 /**
  * Created by cyl on 10/09/15.
+ * defined html element representation when get a valid or invalid value
  */
-define(function (require) {
-    var $  = require('jquery');
+define(function () {
     var _b = function () {
     };
 

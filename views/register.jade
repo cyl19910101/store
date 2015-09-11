@@ -37,9 +37,9 @@ block content
                         input#inputEmail.form-control(type='email', placeholder='电子邮箱，注册后不可更改', required aria-describedby="inputEmailBlock")
                         span.help-block#inputEmailBlock
                     label.sr-only(for='registerBtn')
-                    button.btn.btn-primary.btn-lg.btn-block#registerBtn(type="submit") 注册
+                    button.btn.btn-primary.btn-lg.btn-block(type="submit") 注册
                     //input#submitBtn.btn.btn-lg.btn-primary.btn-block(type='submit' value="注册")
                     p 已有帐号?
-                        a(href='/account') 转至登录
+                        a(href='/authorization') 转至登录
 block javascript
-    script(data-main="javascripts/account" src="javascripts/lib/require.js")
+    script(data-main="javascripts/register" src="javascripts/lib/require.js")

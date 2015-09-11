@@ -1,0 +1,35 @@
+extends layout
+block preprocess
+    script.
+        if (authorization.isAuthenticated()) {
+            window.location.href = '/';
+        }
+block stylesheets
+    link(rel='stylesheet', href='/stylesheets/account.css')
+block content
+    .container.mainContent
+        .row
+            // TODO: lg-desktop show logo
+            //.col-sm-5.col-md-6.logo
+            //    img.logo(src='/images/logo.jpeg')
+            //    h3 买真品，买放心货。
+            .col-md-6
+                form.form-signin#loginForm
+                    h2.form-signin-heading 请登录
+                    .form-group
+                        label.sr-only(for='inputUsername')
+                        input#inputUsername.form-control(type='text', placeholder='用户名', required autofocus aria-describedby="inputUsernameBlock")
+                        span.help-block#inputUsernameBlock
+                    .form-group
+                        label.sr-only(for='inputPassword')
+                        input#inputPassword.form-control(type='password', placeholder='密码', required aria-describedby="inputPasswordBlock")
+                        span.help-block#inputPasswordBlock
+                    //.checkbox
+                    //    label
+                    //        input(type='checkbox', value='remember-me')
+                    //        |  保持登录
+                    button.btn.btn-lg.btn-primary.btn-block(type="submit") 登录
+                    p 没有帐号?
+                        a(href='/register') 转至注册
+block javascript
+    script(data-main="javascripts/authorization" src="javascripts/lib/require.js")
