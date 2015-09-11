@@ -6,9 +6,10 @@ var secret = 'bloody hell';
 // debug:
 var password = '1ed7a08cd468fef3e84e0a9b9584e43d081878e2386a3cac3454dbe168e5b1ce';
 
-var profile = {
+var adminProfile = {
     username: 'admin',
-    role    : 'admin'
+    role    : 'admin',
+    level   : 10
 }
 
 
@@ -20,7 +21,7 @@ var createToken = function (req, res, next) {
         //debug
         if (req.body.username === 'admin') {
             if (req.body.password === password) {
-                var token = jwt.sign(profile, secret, {expiresInMinutes: 30})
+                var token = jwt.sign(adminProfile, secret, {expiresInMinutes: 30})
                 res.json({success: 1, token: token});
             }
             else

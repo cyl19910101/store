@@ -103,6 +103,7 @@ exports.postGood = function (req, res, next) {
     }
 };
 
+//TODO: query good by code
 exports.getGood = function (req, res, next) {
     //if (req.user && req.user.username === 'admin')
     if (req.user) {
