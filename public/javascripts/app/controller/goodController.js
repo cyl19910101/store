@@ -80,13 +80,13 @@ define(function (require) {
         }
 
         //check stock
-        if(!_va.isInt(good.stock)) {
-           showUnvalidData('stock');
+        if (!_va.isInt(good.stock)) {
+            showUnvalidData('stock');
             return false;
         }
 
         //check code
-        if(!_va.isNumeric(good.code)) {
+        if (!_va.isNumeric(good.code)) {
             showUnvalidData('code');
             return false;
         }
@@ -141,18 +141,100 @@ define(function (require) {
         }
     };
 
-    var getGood = function () {
+    var goodPreviewThumbnailHTML = '<div class="thumbnail"></div>';
+
+    var goodPreviewFrameHTML = '<div class="col-sm-6 col-md-4"></div>';
+
+    var buyBtnHTML       = '<button class="btn btn-success btn-block">立即购买</button>';
+    var addToCartBtnHTML = '<button class="btn btn-default btn-block">加入购物车 <span class="glyphicon glyphicon-shopping-cart"></span></button>';
+
+    var getGoodPreviewImageFrameHTML = function (src) {
+        if (src)
+            return '<img src="/picture/' + src + '" class="img-responsive">';
+        else return '<img alt="图片缺失" class="img-responsive">'
+    };
+
+    var getGoodPreviewInfoHTML = function (name, brief, price, stock) {
+        //TODO: align center
+        var _div   = $('<div class="caption"></div>');
+        var _title = $('<h3>' + name + '</h3>');
+        var _brief = $('<p>' + brief + '</p>');
+        var _price = $('<p>¥:' + price + '</p>');
+        var _stock = $('<p>库存:' + stock + '</p>');
+        _div.append(_title);
+        _div.append(_brief);
+        _div.append(_price);
+        _div.append(_stock);
+        return _div;
+    };
+
+    var displayGoodPreview = function (good) {
+        //TODO: use immediate instead of setTimeout
+        var name  = good.name || "未添加";
+        var price = good.price || "未添加";
+        var stock = good.stock || "未添加";
+        var brief = good.brief || "未添加";
+        var image = good.image;
+        var code  = good.code || "未添加";
+
+        setTimeout(function () {
+            var frame     = $(goodPreviewFrameHTML);
+            var thumbnail = $(goodPreviewThumbnailHTML);
+            //image ui
+            //TODO: change html if image doesn't exist
+            thumbnail.append(getGoodPreviewImageFrameHTML(image));
+
+            //info ui
+            thumbnail.append(getGoodPreviewInfoHTML(name, brief, price, stock));
+
+            //button ui
+            //TODO: bind process
+            thumbnail.append(buyBtnHTML);
+            thumbnail.append(addToCartBtnHTML);
+
+            frame.append(thumbnail);
+            $('#goods').append(frame);
+        }, 0);
+    };
+
+    var queryGoodIndex = function (isVIP) {
+        $.ajax({
+            url     : isVIP ? '/api/v1/good/vipIndex' : '/api/v1/good/index',
+            method  : 'GET',
+            dataType: 'json',
+            success : function (res) {
+                if (res.success) {
+                    if (res.goods) {
+                        res.goods.forEach(function (good) {
+                            displayGoodPreview(good);
+                        });
+                    }
+                } else {
+                    console.log('query good vip index fail');
+                }
+            }, error: function () {
+                console.log('query good vip index error');
+            }
+        });
+    };
+
+    var getGoodIndex = function () {
+        if (authorization.isAuthenticated()) {
+            queryGoodIndex(1);
+        } else {
+            queryGoodIndex(0);
+        }
 
     };
 
 //exports api
     _g.prototype = {
-        insertImage: insertImage,
-        deleteImage: deleteImage,
-        insertTag  : insertTag,
-        deleteTag  : deleteTag,
-        postGood   : postGood,
-        getGood    : getGood
+        insertImage : insertImage,
+        deleteImage : deleteImage,
+        insertTag   : insertTag,
+        deleteTag   : deleteTag,
+        postGood    : postGood,
+        getGoodIndex: getGoodIndex
     };
     return new _g();
 })

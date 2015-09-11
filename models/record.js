@@ -7,5 +7,5 @@ var RecordSchema = new Schema({
   opreateContent: {type: String}
 });
 
-mongoose.model('Record', RecordSchema)
+mongoose.model('Record', RecordSchema);
 exports.RecordSchema = RecordSchema;

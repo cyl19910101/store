@@ -10,7 +10,7 @@ exports.getUser = function (req, res, next) {
 exports.postUser = function (req, res, next) {
     if (req.user) {
         if (req.user.username !== 'admin') {
-            res.send(401);
+            res.status(401).end();
         }
         else {
             //TODO: admin post a user, not really necessary
