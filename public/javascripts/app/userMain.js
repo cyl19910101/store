@@ -1,7 +1,10 @@
 define(function (require) {
-    require('app/controller/sharedContentController');
+    var _s             = require('app/controller/sharedContentController');
     var userController = require('app/controller/userController');
-    var $                 = require('jquery');
+    var $              = require('jquery');
+
+    _s.initAjaxToken();
+
     $(function () {
         userController.initUI();
     });

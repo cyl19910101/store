@@ -9,7 +9,7 @@
             .form-group.col-sm-12.col-md-6
                 label.col-sm-2.col-md-3.control-label(for="goodNameInput") 商品名
                 .col-sm-10.col-md-9
-                    input.form-control#goodNameInput(type="text", placeholder="商品名" name="name" autofocus required)
+                    input.form-control#goodNameInput(type="text", placeholder="商品名" name="name" required autofocus)
             .form-group.col-sm-12.col-md-6
                 label.col-sm-2.col-md-3.control-label(for="goodBasicPriceInput") 基准价格
                 .col-sm-10.col-md-9
@@ -17,7 +17,7 @@
             .form-group.col-sm-12.col-md-6
                 label.col-sm-2.col-md-3.control-label(for="goodStockInput") 库存
                 .col-sm-10.col-md-9
-                    input.form-control#goodStockInput(type="number", min="0" max="20000" placeholder="库存" name="stock")
+                    input.form-control#goodStockInput(type="number", min="0" max="20000" placeholder="库存" name="stock" required)
             .form-group.col-sm-12.col-md-6
                 label.col-sm-2.col-md-3.control-label 重量(kg)
                 .col-sm-10.col-md-9
@@ -71,7 +71,6 @@
             .col-md-12
                 label 商品描述
                 textarea.form-control#goodDescriptionTextarea(rows="5" name="description")
-                br
-            button.btn.btn-success.btn-lg.btn-block#postGoodBtn(type="submit") 添加商品
-        br
-        p 商品上传接口，输入的商品名称和简介将在商品预览框中显示，请使用纯文本描述商品，以后再根据需要添加富文本展示页面
+            .col-md-12
+                button.btn.btn-success.btn-lg.btn-block#postGoodBtn(type="submit") 添加商品
+        div.col-md-12 商品上传接口，输入的商品名称和简介将在商品预览框中显示，请使用纯文本描述商品，以后再根据需要添加富文本展示页面

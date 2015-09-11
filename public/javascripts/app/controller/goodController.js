@@ -3,6 +3,8 @@ define(function (require) {
     var good      = require('app/model/good');
     var objectKey = require('app/util/objectKey');
     var _va       = require('_va');
+    var _s        = require('app/controller/sharedContentController');
+    _s.initAjaxToken();
     var _g        = function () {
     };
 
@@ -227,6 +229,35 @@ define(function (require) {
 
     };
 
+    var initUI = function () {
+        //insertTag
+        //$('#insertTagBtn').click(insertTag);
+
+        //console.log($('#tagInput').data('events'));
+        //
+        //$('#createGoodForm').on('submit', function (e) {
+        //    e.preventDefault();
+        //    goodController.postGood();
+        //});
+
+        //disable default submit event in tag input element
+        //$('#tagInput').keyup(function (e) {
+        //    if (e.keyCode === 13) {
+        //        e.preventDefault();
+        //        insertTag();
+        //    }
+        //});
+        //
+        //$('#tagInput').keydown(function (e) {
+        //    if (e.keyCode === 13)
+        //        e.preventDefault();
+        //});
+        //$('#tagInput').keypress(function (e) {
+        //    if (e.keyCode === 13)
+        //        e.preventDefault();
+        //});
+    };
+
 //exports api
     _g.prototype = {
         insertImage : insertImage,
@@ -234,7 +265,8 @@ define(function (require) {
         insertTag   : insertTag,
         deleteTag   : deleteTag,
         postGood    : postGood,
-        getGoodIndex: getGoodIndex
+        getGoodIndex: getGoodIndex,
+        initUI      : initUI
     };
     return new _g();
 })

@@ -1,7 +1,8 @@
 define(function (require) {
-    require('app/controller/sharedContentController');
+    var _s                      = require('app/controller/sharedContentController');
     var authorizationController = require('app/controller/authorizationController');
-    var $                 = require('jquery');
+    var $                       = require('jquery');
+    _s.initAjaxToken();
     $(function () {
         authorizationController.initUI();
     });

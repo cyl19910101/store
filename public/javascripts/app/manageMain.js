@@ -1,10 +1,10 @@
 define(function (require) {
-    require('app/controller/sharedContentController');
+    var _s               = require('app/controller/sharedContentController');
     var manageController = require('app/controller/manageController')
     var $                = require('jquery');
-    // config page content
 
-    //config fileinput
+    _s.initAjaxToken();
+
     $(function () {
         manageController.initUI();
     });

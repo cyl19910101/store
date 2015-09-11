@@ -6,14 +6,16 @@ define(function (require) {
     var $                 = require('jquery');
     var accountController = require('app/controller/accountController');
     require('_BS');
-    $.ajaxSetup({
-        'beforeSend': function (xhr) {
-            if (localStorage.getItem('token')) {
-                xhr.setRequestHeader('Authorization',
-                    'Bearer ' + localStorage.getItem('token'));
+    var initAjaxToken     = function () {
+        $.ajaxSetup({
+            'beforeSend': function (xhr) {
+                if (localStorage.getItem('token')) {
+                    xhr.setRequestHeader('Authorization',
+                        'Bearer ' + localStorage.getItem('token'));
+                }
             }
-        }
-    });
+        });
+    };
 
     var logoutBtnHTML = '<a id="logoutBtn" class="config-navbar-brand"><span class="glyphicon glyphicon-log-out"></span></a>';
     var manageBtnHTML = '<a href="/manage" class="config-navbar-brand"><span class="glyphicon glyphicon-cog"></span></a>';
@@ -38,4 +40,10 @@ define(function (require) {
     else {
         $('#accountArea').html(userBtnHTML + cartBtnHTML);
     }
+
+    var _s = function () {
+    };
+
+    _s.prototype = {initAjaxToken: initAjaxToken};
+    return new _s();
 });

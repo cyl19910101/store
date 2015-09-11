@@ -1,4 +1,3 @@
-define(function (require) {
-  require('app/controller/sharedContentController');
-  var indexController = require('app/controller/indexController')
+define(['app/controller/sharedContentController', 'app/controller/indexController'], function (s, i) {
+    s.initAjaxToken();
 })

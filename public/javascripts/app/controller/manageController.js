@@ -15,14 +15,7 @@ define(function (require) {
         /**
          * init other ui
          */
-            //insertTag
-        $('#insertTagBtn').click(goodController.insertTag);
-
-        //TODO: init post good ui etc
-        $('#createGoodForm').on('submit', function (e) {
-            e.preventDefault();
-            goodController.postGood();
-        });
+        goodController.initUI();
     };
 
     _m.prototype = {initUI: initUI};
