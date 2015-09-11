@@ -231,31 +231,29 @@ define(function (require) {
 
     var initUI = function () {
         //insertTag
-        //$('#insertTagBtn').click(insertTag);
+        $('#insertTagBtn').click(insertTag);
 
-        //console.log($('#tagInput').data('events'));
-        //
-        //$('#createGoodForm').on('submit', function (e) {
-        //    e.preventDefault();
-        //    goodController.postGood();
-        //});
+        $('#createGoodForm').on('submit', function (e) {
+            e.preventDefault();
+            goodController.postGood();
+        });
 
         //disable default submit event in tag input element
-        //$('#tagInput').keyup(function (e) {
-        //    if (e.keyCode === 13) {
-        //        e.preventDefault();
-        //        insertTag();
-        //    }
-        //});
-        //
-        //$('#tagInput').keydown(function (e) {
-        //    if (e.keyCode === 13)
-        //        e.preventDefault();
-        //});
-        //$('#tagInput').keypress(function (e) {
-        //    if (e.keyCode === 13)
-        //        e.preventDefault();
-        //});
+        $('#tagInput').keyup(function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                insertTag();
+            }
+        });
+
+        $('#tagInput').keydown(function (e) {
+            if (e.keyCode === 13)
+                e.preventDefault();
+        });
+        $('#tagInput').keypress(function (e) {
+            if (e.keyCode === 13)
+                e.preventDefault();
+        });
     };
 
 //exports api

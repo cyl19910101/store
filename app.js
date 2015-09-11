@@ -25,8 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use('/picture', express.static(process.env['PICTURE_PATH']));
 
-app.use('/', routes);
 app.use('/api/v1', apiRouterV1);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
