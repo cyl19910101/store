@@ -1,11 +1,13 @@
 extends layout
 block stylesheets
-  link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel='stylesheet', href='/stylesheets/index.css')
 block content
-  .container-fluid
-    .panel.panel-info
-      .panel-heading 推荐商品
-      .panel-body
-        .row#goods
+    .container
+        .row
+            .col-lg-12
+                .panel.panel-info
+                    .panel-heading 推荐商品
+                    .panel-body
+                        .row#goods
 block javascript
-  script(data-main="javascripts/index" src="javascripts/lib/require.js")
+    script(data-main="javascripts/index" src="javascripts/lib/require.js")
