@@ -24,7 +24,7 @@ define(function (require) {
     var insertTag = function () {
         var name = $('#tagInput').val();
         if (!name) return;
-        var tag        = $('<span class="label label-default label-tag">' + name + '</span>');
+        var tag        = $('<button class="btn btn-default btn-tag">' + name + '</button>');
         tag.click(function () {
             deleteTag(tag, name);
         });
