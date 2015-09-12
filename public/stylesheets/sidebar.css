@@ -9,6 +9,10 @@
     background-color   : white;
 }
 
+body {
+    background : url("/images/bg.png") #eee;
+}
+
 #wrapper.toggled {
     padding-left : 250px;
     /*padding-top      : 50px;*/
