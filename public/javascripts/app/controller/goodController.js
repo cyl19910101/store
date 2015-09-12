@@ -23,8 +23,7 @@ define(function (require) {
     var goodTags  = {};
     var insertTag = function () {
         var name = $('#tagInput').val();
-        //TODO: bind deleteTag
-        //var tag = '<span onclick="deleteTag(this);" name="' + name + '" class="label label-info">' + name + '</span>';
+        if (!name) return;
         var tag        = $('<span class="label label-default label-tag">' + name + '</span>');
         tag.click(function () {
             deleteTag(tag, name);
@@ -191,8 +190,8 @@ define(function (require) {
 
             //button ui
             //TODO: bind process
-            thumbnail.append(buyBtnHTML);
-            thumbnail.append(addToCartBtnHTML);
+            //thumbnail.append(buyBtnHTML);
+            //thumbnail.append(addToCartBtnHTML);
 
             frame.append(thumbnail);
             $('#goods').append(frame);
