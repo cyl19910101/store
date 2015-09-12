@@ -1,9 +1,39 @@
 doctype html
 html
     head
-        title test form ui
-        meta(name="viewport", content="width=device-width, initial-scale=1")
-        meta(charset="UTF-8")
+        title 澳品国际
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(charset='UTF-8')
+        link(rel="shortcut icon" href="/images/favicon.ico")
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/stylesheets/sidebar.css')
     body
-        form
-            input(type="email" required autofocus)
+        header
+            nav.navbar.navbar-default.navbar-fixed-top
+                .container
+                    .navbar-header
+                        button#b_t.navbar-toggle.collapsed(type="button" aria-expanded="false")
+                            span.sr-only Toggle
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand home
+        #wrapper
+            #sidebar-wrapper
+                ul.sidebar-nav
+                    li.sidebar-brand
+                        a home
+            #page-content-wrapper
+                .container-fluid
+                    .row
+                        .col-lg-12
+                            h1 content
+        script(src="/bower_components/jquery/dist/jquery.min.js")
+        script.
+            $(function () {
+                $('#b_t').click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+            });

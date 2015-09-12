@@ -3,9 +3,10 @@ define(function (require) {
     var manageController = require('app/controller/manageController')
     var $                = require('jquery');
 
-    _s.initAjaxToken();
 
     $(function () {
+        _s.initAjaxToken();
+        _s.initSidebarToggle();
         manageController.initUI();
     });
 })

@@ -99,14 +99,17 @@ html
         link(rel="shortcut icon" href="/images/favicon.ico")
         link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
         link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
-        link(rel='stylesheet', href='/stylesheets/layout.css')
+        //debug
+        //link(rel='stylesheet', href='/stylesheets/layout.css')
+        link(rel='stylesheet', href='/stylesheets/sidebar.css')
         style.
             body {
                 background-color : #efeff3;
             }
         block stylesheets
     body
-        header.navbar.navbar-default.navbar-fixed-top(name='navbar')
+        //debug
+        //header.navbar.navbar-default.navbar-fixed-top(name='navbar')
             .container
                 .row
                     div.col-xs-2.col-sm-1
@@ -121,5 +124,31 @@ html
                                     button.btn.btn-default(type='submit')
                                         span.glyphicon.glyphicon-search
                     div#accountArea
-        block content
+        header
+            nav.navbar.navbar-default.navbar-fixed-top
+                .container
+                    .cow
+                        .navbar-header.col-xs-12
+                            button#b_t.navbar-toggle.toggle-left(type="button" aria-expanded="false")
+                                span.icon-bar
+                                span.icon-bar
+                                span.icon-bar
+                            a.navbar-brand(href="/")
+                                span.glyphicon.glyphicon-home
+                            //form.navbar-form.navbar-left
+                                .input-group
+                                    input.form-control(type='text', placeholder='贝拉美')
+                                    span.input-group-btn
+                                        button.btn.btn-default(type='submit')
+                                            span.glyphicon.glyphicon-search
+                            #accountArea
+        #wrapper.toggled
+            #sidebar-wrapper
+                ul.sidebar-nav
+                    li.sidebar-brand
+                        a I'm just a test link
+            #page-content-wrapper
+                block content
+        //debug
+        //block content
         block javascript

@@ -3,9 +3,9 @@ define(function (require) {
     var userController = require('app/controller/userController');
     var $              = require('jquery');
 
-    _s.initAjaxToken();
-
     $(function () {
+        _s.initSidebarToggle();
+        _s.initAjaxToken();
         userController.initUI();
     });
 })

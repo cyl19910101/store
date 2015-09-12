@@ -17,6 +17,15 @@ define(function (require) {
         });
     };
 
+    //TODO: refactor move to other place
+    var initSidebarToggle = function () {
+        //debug
+        $('#b_t').click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    };
+
     var logoutBtnHTML = '<a id="logoutBtn" class="config-navbar-brand"><span class="glyphicon glyphicon-log-out"></span></a>';
     var manageBtnHTML = '<a href="/manage" class="config-navbar-brand"><span class="glyphicon glyphicon-cog"></span></a>';
     var userBtnHTML   = '<a href="/user" class="config-navbar-brand"><span class="glyphicon glyphicon-user"></span></a>';
@@ -44,6 +53,9 @@ define(function (require) {
     var _s = function () {
     };
 
-    _s.prototype = {initAjaxToken: initAjaxToken};
+    _s.prototype = {
+        initAjaxToken    : initAjaxToken,
+        initSidebarToggle: initSidebarToggle
+    };
     return new _s();
 });

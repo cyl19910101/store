@@ -5,14 +5,13 @@ block preprocess
             window.location.href = '/';
         }
 block stylesheets
-    link(rel='stylesheet', href='/stylesheets/manage.css')
     link(rel='stylesheet', href='/bower_components/bootstrap-offcanvas/dist/css/bootstrap.offcanvas.min.css')
     link(rel='stylesheet', href='/bower_components/bootstrap-fileinput/css/fileinput.min.css' media="all" type="text/css")
+    link(rel='stylesheet', href='/stylesheets/manage.css')
 block content
     //.clearfix.navbar.navbar-fixed-top(style='margin-top: 50px;')
         include manageNavbar
-    .container.managePanel.box
-        h1 广告占位
+    .container-fluid.box
         include addGood
         hr
         #manageGoodForm
