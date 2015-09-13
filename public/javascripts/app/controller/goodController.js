@@ -12,7 +12,7 @@ define(function (require) {
     var imageList = {};
 
     var insertImage = function (key) {
-        imageList[key] = 0;
+        imageList[key] = 1;
     };
 
     var deleteImage = function (key) {
@@ -22,15 +22,16 @@ define(function (require) {
     //tags
     var goodTags  = {};
     var insertTag = function () {
+        //TODO: fix bug -- mobile browser can't delete tag by click
         var name = $('#tagInput').val();
-        if (!name) return;
+        if (!name || goodTags[name]) return;
         var tag        = $('<button class="btn btn-default btn-tag">' + name + '</button>');
+        $('#currentLabel').append(tag);
         tag.click(function () {
             deleteTag(tag, name);
         });
-        $('#currentLabel').append(tag);
         $('#tagInput').val('');
-        goodTags[name] = 0;
+        goodTags[name] = 1;
     }
 
     var deleteTag = function (ele, name) {

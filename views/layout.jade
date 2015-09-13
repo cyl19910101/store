@@ -108,22 +108,6 @@ html
             }
         block stylesheets
     body
-        //debug
-        //header.navbar.navbar-default.navbar-fixed-top(name='navbar')
-            .container
-                .row
-                    div.col-xs-2.col-sm-1
-                        .navbar-header
-                            a.navbar-brand(href='/')
-                                span.glyphicon.glyphicon-home
-                    .col-xs-7.col-md-9
-                        .row.searchForm
-                            .input-group
-                                input.form-control(type='text', placeholder='贝拉美')
-                                span.input-group-btn
-                                    button.btn.btn-default(type='submit')
-                                        span.glyphicon.glyphicon-search
-                    div#accountArea
         header
             nav.navbar.navbar-default.navbar-fixed-top
                 .container
@@ -144,11 +128,7 @@ html
                             #accountArea
         #wrapper
             #sidebar-wrapper
-                ul.sidebar-nav
-                    li.sidebar-brand
-                        a I'm just a test link
+                block sidebar
             #page-content-wrapper
                 block content
-        //debug
-        //block content
         block javascript

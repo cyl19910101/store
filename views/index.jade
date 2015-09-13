@@ -1,6 +1,10 @@
 extends layout
 block stylesheets
     link(rel='stylesheet', href='/stylesheets/index.css')
+block sidebar
+    ul.sidebar-nav
+        li.sidebar-brand
+            a I'm just a test link
 block content
     .container-fluid
         .row

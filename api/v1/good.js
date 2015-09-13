@@ -103,24 +103,36 @@ exports.postGood = function (req, res, next) {
     }
 };
 
-//TODO: query good by code
+/**
+ *              get good api for guest user
+ *                  1st. get good's code
+ *                  2nd. query database
+ *                  3rd. send to server
+ * @param req
+ * @param res
+ * @param next
+ */
+//debug
 exports.getGood = function (req, res, next) {
-    //if (req.user && req.user.username === 'admin')
-    if (req.user) {
-        var username = user.username;
-        //1st. get user's level
-        User.findOne({username: username}, function (err, data) {
-            //debug
-            console.log(data);
+    var code = req.params.code;
+    if (code) {
+        Good.findOne({code: code}, 'name salePrice stock images brief code description', function (err, data) {
+            if (!err) {
+                console.log(data);
+                res.json({success: 'success to query good', data: data});
+            }
+            else {
+                res.status(500).end();
+            }
         })
-
-        //2nd. get good data from database
-
-        //3rd. choose good data value by user's level maybe should do this before 2nd
     }
-    else {
-        res.send({error: 'did not login'})
-    }
+    else
+        res.status(400).end();
+
+}
+
+exports.vipGetGood = function (req, res, next) {
+
 }
 
 exports.index = function (req, res, next) {

@@ -21,9 +21,10 @@ router.delete('/picture', _ejwt, pictureController.deletePicture);
 //END picture operation
 
 //good operation
+//TODO: admin query good
 router.get('/good/index', goodController.index);
 router.get('/good/vipIndex', _ejwt, goodController.vipIndex);
-//TODO: admin query good
+router.get('/good/:code', goodController.getGood);
 
 router.post('/good', _ejwt, goodController.postGood);
 
