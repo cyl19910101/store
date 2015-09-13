@@ -1,7 +1,13 @@
 define(function (require) {
-    var $              = require('jquery');
     var goodController = require('app/controller/goodController');
-    $(function () {
-        goodController.getGoodIndex();
-    });
+    var _i             = function () {
+    };
+
+    _i.prototype = {
+        init: function () {
+            goodController.getGoodIndex();
+        }
+    }
+
+    return new _i();
 });

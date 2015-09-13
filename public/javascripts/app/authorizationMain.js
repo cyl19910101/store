@@ -3,8 +3,7 @@ define(function (require) {
     var authorizationController = require('app/controller/authorizationController');
     var $                       = require('jquery');
     $(function () {
-        _s.initAjaxToken();
-        _s.initSidebarToggle();
+        _s.init();
         authorizationController.initUI();
     });
 })

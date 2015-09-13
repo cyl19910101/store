@@ -4,8 +4,7 @@ define(function (require) {
     var $              = require('jquery');
 
     $(function () {
-        _s.initSidebarToggle();
-        _s.initAjaxToken();
+        _s.init();
         userController.initUI();
     });
 })

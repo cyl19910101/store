@@ -3,8 +3,8 @@ define(function (require) {
     var good      = require('app/model/good');
     var objectKey = require('app/util/objectKey');
     var _va       = require('_va');
-    var _s        = require('app/controller/sharedContentController');
-    _s.initAjaxToken();
+    var _a        = require('app/controller/ajaxTokenController');
+    _a.initAjaxToken();
     var _g        = function () {
     };
 
@@ -149,16 +149,16 @@ define(function (require) {
     var buyBtnHTML       = '<button class="btn btn-success btn-block">立即购买</button>';
     var addToCartBtnHTML = '<button class="btn btn-default btn-block">加入购物车 <span class="glyphicon glyphicon-shopping-cart"></span></button>';
 
-    var getGoodPreviewImageFrameHTML = function (src) {
+    var getGoodPreviewImageFrameHTML = function (src, code) {
         if (src)
-            return '<img src="/picture/' + src + '" class="img-responsive">';
+            return '<a target="_blank" href="/product?item=' + code + '"><img src="/picture/' + src + '" class="img-responsive"></a>';
         else return '<img alt="图片缺失" class="img-responsive">'
     };
 
-    var getGoodPreviewInfoHTML = function (name, brief, price, stock) {
+    var getGoodPreviewInfoHTML = function (name, brief, price, stock, code) {
         //TODO: align center
         var _div   = $('<div class="caption"></div>');
-        var _title = $('<h3>' + name + '</h3>');
+        var _title = $('<a target="_blank" href="/product?item=' + code + '"><h3>' + name + '</h3></a>');
         var _brief = $('<p>' + brief + '</p>');
         var _price = $('<p>¥:' + price + '</p>');
         var _stock = $('<p>库存:' + stock + '</p>');
@@ -183,10 +183,10 @@ define(function (require) {
             var thumbnail = $(goodPreviewThumbnailHTML);
             //image ui
             //TODO: change html if image doesn't exist
-            thumbnail.append(getGoodPreviewImageFrameHTML(image));
+            thumbnail.append(getGoodPreviewImageFrameHTML(image, code));
 
             //info ui
-            thumbnail.append(getGoodPreviewInfoHTML(name, brief, price, stock));
+            thumbnail.append(getGoodPreviewInfoHTML(name, brief, price, stock, code));
 
             //button ui
             //TODO: bind process
@@ -234,7 +234,7 @@ define(function (require) {
 
         $('#createGoodForm').on('submit', function (e) {
             e.preventDefault();
-            goodController.postGood();
+            postGood();
         });
 
         //disable default submit event in tag input element

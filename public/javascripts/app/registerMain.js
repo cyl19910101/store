@@ -5,8 +5,7 @@ define(function (require) {
 
 
     $(function () {
-        _s.initSidebarToggle();
-        _s.initAjaxToken();
+        _s.init();
         registerController.initUI();
     });
 })

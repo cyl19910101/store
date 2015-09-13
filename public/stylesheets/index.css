@@ -1,10 +1,4 @@
-
-.qr {
-    max-width  : 120px;
-    max-height : 120px;
-}
-
-.logo {
-    max-width  : 120px;
-    max-height : 120px;
+/*title link*/
+a h3 {
+    color: #080808;
 }
