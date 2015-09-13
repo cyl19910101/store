@@ -13,17 +13,24 @@ define(function (require) {
                 url    : '/api/v1/good/' + goodCode,
                 method : "GET",
                 success: function (res) {
-                    if (res.success) {
-                        console.log(res.data);
-                    }
+                    if (res)
+                        if (res.success) {
+                            console.log(res.good);
+                        }
+                        else {
+                            console.log(res.error);
+                        }
                     else {
-                        console.log(res.error);
+                        //TODO:
                     }
                 },
                 error  : function () {
                     //TODO
                 }
             });
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
         }
     }
 

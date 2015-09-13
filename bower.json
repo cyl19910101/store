@@ -18,10 +18,12 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
     "bootstrap": "~3.3.5",
-    "bootstrap-offcanvas": "~1.4.2",
     "bootstrap-fileinput": "~4.2.6",
+    "bootstrap-offcanvas": "~1.4.2",
+    "font-awesome": "~4.4.0",
+    "jquery": "~2.1.4",
+    "metisMenu": "~2.1.0",
     "validator-js": "~4.0.5"
   }
 }

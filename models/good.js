@@ -1,6 +1,7 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 var RecordSchema = require('./record').RecordSchema;
+var ReviewSchema = require('./review').ReviewSchema;
 
 var GoodSchema = new Schema({
     name       : {type: String, required: true},
@@ -11,6 +12,7 @@ var GoodSchema = new Schema({
     //TODO: would better change to long
     code       : {type: String, unique: true},
     modified   : [RecordSchema],
+    reviews    : [ReviewSchema],
     //classifier, TODO: make it enumable
     goodType   : {type: String},
     deliverType: {type: String},

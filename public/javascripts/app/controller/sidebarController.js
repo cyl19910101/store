@@ -1,14 +1,14 @@
-define(function (require) {
-    var $ = require('jquery');
+define(['jquery', '_MENU'], function ($, _MENU) {
 
     var initSidebarToggle = function () {
-        //debug
         $('#b_t').click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+        $('#menu').metisMenu();
     };
 
+    //TODO: scrollspy collapse
     var _s = function () {
     };
 

@@ -116,10 +116,32 @@ exports.postGood = function (req, res, next) {
 exports.getGood = function (req, res, next) {
     var code = req.params.code;
     if (code) {
-        Good.findOne({code: code}, 'name salePrice stock images brief code description', function (err, data) {
+        Good.findOne({code: code}, 'name salePrice stock images tags brief code description', function (err, data) {
             if (!err) {
-                console.log(data);
-                res.json({success: 'success to query good', data: data});
+                if (data) {
+                    var _data = {};
+                    //TODO: handle undefined query error
+                    if (data.name)
+                        _data.name = data.name;
+                    if (data.salePrice)
+                        _data.price = data.salePrice[0];
+                    if (data.stock)
+                        _data.stock = data.stock;
+                    //TODO: choose which picture to preview
+                    if (data.images)
+                        _data.images = data.images;
+                    if (data.brief)
+                        _data.brief = data.brief;
+                    if (data.tags)
+                        _data.tags = data.tags;
+                    if (data.description)
+                        _data.description = data.description;
+                    _data.code = data.code;
+                    res.json({success: 'success to query good', data: _data});
+                }
+                else {
+                    res.json({error: 'no such good'});
+                }
             }
             else {
                 res.status(500).end();
