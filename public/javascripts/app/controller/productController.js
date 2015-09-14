@@ -87,14 +87,12 @@ define(function (require) {
             _url += goodCode;
             //TODO: vip  || normal
             $.ajax({
-
                 url    : _url,
                 method : "GET",
                 success: function (res) {
                     if (res)
                         if (res.success) {
                             if (res.data) {
-                                console.log(res.data)
                                 initProducInfo(res.data);
                                 initImages(res.data);
                             }

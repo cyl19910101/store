@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: 'javascripts',
+    baseUrl: '/javascripts',
     shim   : {
         '_BS'             : {deps: ['jquery']},
         '_MENU'           : {deps: ['jquery', '_BS']},

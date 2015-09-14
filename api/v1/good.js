@@ -154,7 +154,6 @@ exports.getGood = function (req, res, next) {
 }
 
 exports.vipGetGood = function (req, res, next) {
-    console.log(req.user)
     var code = req.params.code;
     if (req.user && req.user.level) {
         if (code) {
@@ -231,8 +230,6 @@ exports.index = function (req, res, next) {
 
 exports.vipIndex = function (req, res, next) {
     //TODO:paginate
-    //TODO: get user's token
-    console.log(req.user)
     if (req.user && req.user.level) {
         Good.find({}, 'name salePrice stock images brief code', function (err, datas) {
             if (err) {

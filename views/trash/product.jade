@@ -1,41 +1,8 @@
 extends layout
 block stylesheets
-    style.
-        .carousel-inner .item img {
-            margin : 0 auto;
-        }
-
-        .blockdiv {
-            margin-bottom : 30px;
-        }
-
-        .blockitem {
-            box-shadow : 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-            padding    : 20px;
-            background : white;
-        }
-
-        .carousel-control.right {
-            background-image : none;
-        }
-
-        .carousel-control.left {
-            background-image : none;
-        }
-
-        .productbtn {
-            padding-bottom : 10px;
-        }
-
-        .productinfo {
-            padding-left : 30px;
-            font-weight  : 500;
-        }
-
-        .numberinput {
-            margin-bottom: 10px;
-        }
-
+    link(rel='stylesheet', href='/stylesheets/product.css')
+block sidebar
+    include shoppingSidebar
 block content
     .container-fluid
         .row

@@ -1,0 +1,41 @@
+aside.sidebar
+    nav.sidebar-nav
+        ul#menu.metismenu
+            li.active
+                a(href='#', aria-expanded='true')
+                    span.sidebar-nav-item-icon.glyphicon.glyphicon-th
+                    span.sidebar-nav-item 商品管理
+                    span.glyphicon.arrow
+                ul.collapse.in(aria-expanded='true')
+                    li
+                        a(href='#createGoodPanel') 添加商品
+                    li
+                        a(href='#manageGoodForm') 管理已有商品
+            li
+                a(href='#', aria-expanded='false')
+                    | 消息管理
+                    span.glyphicon.arrow
+                ul.collapse(aria-expanded='false')
+                    li
+                        a(href='#') item 0.1
+            li
+                a(href='#', aria-expanded='false')
+                    | 用户管理
+                    span.glyphicon.arrow
+                ul.collapse(aria-expanded='false')
+                    li
+                        a(href='#') item 1.1
+            li
+                a(href='#', aria-expanded='false')
+                    | 订单管理
+                    span.glyphicon.arrow
+                ul.collapse(aria-expanded='false')
+                    li
+                        a(href='#') item 2.1
+            li
+                a(href='#', aria-expanded='false')
+                    | 系统管理
+                    span.glyphicon.arrow
+                ul.collapse(aria-expanded='false')
+                    li
+                        a(href='#') item 1.1

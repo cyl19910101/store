@@ -3,7 +3,6 @@ define(function (require) {
     var manageController = require('app/controller/manageController')
     var $                = require('jquery');
 
-
     $(function () {
         _s.init();
         manageController.initUI();

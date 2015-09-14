@@ -3,7 +3,7 @@ define(function (require) {
     var accountController = require('app/controller/accountController');
 
     var logoutBtnHTML = '<a id="logoutBtn" class="config-navbar-brand"><span class="glyphicon glyphicon-log-out"></span></a>';
-    var manageBtnHTML = '<a href="/manage" class="config-navbar-brand"><span class="glyphicon glyphicon-cog"></span></a>';
+    var manageBtnHTML = '<a href="/manage/admin" class="config-navbar-brand"><span class="glyphicon glyphicon-cog"></span></a>';
     var userBtnHTML   = '<a href="/user" class="config-navbar-brand"><span class="glyphicon glyphicon-user"></span></a>';
     var cartBtnHTML   = '<a href="/cart" class="config-navbar-brand"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 

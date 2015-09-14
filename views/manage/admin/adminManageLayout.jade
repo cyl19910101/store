@@ -1,0 +1,8 @@
+extends ../../layout
+block preprocess
+    script.
+        if (!authorization.isAuthenticated() || authorization.getTokenUser() !== 'admin') {
+            window.location.href = '/';
+        }
+block sidebar
+    include adminSidebar

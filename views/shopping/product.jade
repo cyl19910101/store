@@ -1,0 +1,46 @@
+extends ../layout
+block stylesheets
+    link(rel='stylesheet', href='/stylesheets/product.css')
+block sidebar
+    include shoppingSidebar
+block content
+    .container-fluid
+        .row
+            .col-lg-12
+                .row
+                    .col-md-6.blockdiv
+                        .blockitem
+                            .carousel.slide#carousel-example-generic
+                                ol.carousel-indicators
+                                .carousel-inner(role="listbox" style="width:100%")
+                                a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+                                    span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                                    span.sr-only Previous
+                                a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+                                    span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                                    span.sr-only Next
+                    .col-md-6.blockdiv
+                        .blockitem
+                            h3.productinfo#productName
+                            p.productinfo#productBrief
+                            p.productinfo#productTags
+                            p.productinfo#productPrice
+                            p.productinfo#productStock
+                            .row
+                                .col-xs-6.numberinput
+                                    .input-group
+                                        span.input-group-addon 数量
+                                        input.form-control#numberInput(type="number" min="1" value=1 placeholder="数量"  required)
+                            .row
+                                .col-xs-6.productbtn
+                                    a.btn.btn-success.btn-block 立即购买
+                                .col-xs-6.productbtn
+                                    a.btn.btn-default.btn-block 加入购物车
+                                        span.glyphicon.glyphicon-shopping-cart
+            .col-lg-12
+                .blockdiv
+                    .blockitem
+                        h1 商品描述：
+                        #productDescription.productinfo
+block javascript
+    script(data-main="/javascripts/product" src="/javascripts/lib/require.js")
