@@ -25,6 +25,7 @@ router.delete('/picture', _ejwt, pictureController.deletePicture);
 router.get('/good/index', goodController.index);
 router.get('/good/vipIndex', _ejwt, goodController.vipIndex);
 router.get('/good/:code', goodController.getGood);
+router.get('/vipGood/:code', _ejwt, goodController.vipGetGood);
 
 router.post('/good', _ejwt, goodController.postGood);
 

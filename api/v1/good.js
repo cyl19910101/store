@@ -154,6 +154,47 @@ exports.getGood = function (req, res, next) {
 }
 
 exports.vipGetGood = function (req, res, next) {
+    console.log(req.user)
+    var code = req.params.code;
+    if (req.user && req.user.level) {
+        if (code) {
+            Good.findOne({code: code}, 'name salePrice stock images tags brief code description', function (err, data) {
+                if (!err) {
+                    if (data) {
+                        var _data = {};
+                        //TODO: handle undefined query error
+                        if (data.name)
+                            _data.name = data.name;
+                        if (data.salePrice)
+                            _data.price = data.salePrice[req.user.level - 1];
+                        if (data.stock)
+                            _data.stock = data.stock;
+                        //TODO: choose which picture to preview
+                        if (data.images)
+                            _data.images = data.images;
+                        if (data.brief)
+                            _data.brief = data.brief;
+                        if (data.tags)
+                            _data.tags = data.tags;
+                        if (data.description)
+                            _data.description = data.description;
+                        _data.code = data.code;
+                        res.json({success: 'success to query good', data: _data});
+                    }
+                    else {
+                        res.json({error: 'no such good'});
+                    }
+                }
+                else {
+                    res.status(500).end();
+                }
+            })
+        }
+        else
+            res.status(400).end();
+    } else {
+        res.status(401).end();
+    }
 
 }
 
@@ -191,6 +232,7 @@ exports.index = function (req, res, next) {
 exports.vipIndex = function (req, res, next) {
     //TODO:paginate
     //TODO: get user's token
+    console.log(req.user)
     if (req.user && req.user.level) {
         Good.find({}, 'name salePrice stock images brief code', function (err, datas) {
             if (err) {

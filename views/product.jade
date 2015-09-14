@@ -1,25 +1,79 @@
 extends layout
+block stylesheets
+    style.
+        .carousel-inner .item img {
+            margin : 0 auto;
+        }
+
+        .blockdiv {
+            margin-bottom : 30px;
+        }
+
+        .blockitem {
+            box-shadow : 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            padding    : 20px;
+            background : white;
+        }
+
+        .carousel-control.right {
+            background-image : none;
+        }
+
+        .carousel-control.left {
+            background-image : none;
+        }
+
+        .productbtn {
+            padding-bottom : 10px;
+        }
+
+        .productinfo {
+            padding-left : 30px;
+            font-weight  : 500;
+        }
+
+        .numberinput {
+            margin-bottom: 10px;
+        }
+
 block content
     .container-fluid
         .row
             .col-lg-12
-                .carousel.slide#carousel-example-generic
-                    ol.carousel-indicators
-                        li.active(data-target="#carousel-example-generic" data-slide-to="0")
-                        li.active(data-target="#carousel-example-generic" data-slide-to="1")
-                        li.active(data-target="#carousel-example-generic" data-slide-to="2")
-                    .carousel-inner(role="listbox")
-                        .item.active
-                            img(src="/images/aptamilProfutura3.jpg" alt="图片缺失")
-                        .item
-                            img(src="/images/nutellafingercake.jpg" alt="图片缺失")
-                        .item
-                            img(src="/images/menevit90.jpg" alt="图片缺失")
-                    a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
-                        span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
-                        span.sr-only Previous
-                    a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
-                        span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
-                        span.sr-only Next
+                .row
+                    .col-md-6.blockdiv
+                        .blockitem
+                            .carousel.slide#carousel-example-generic
+                                ol.carousel-indicators
+                                .carousel-inner(role="listbox" style="width:100%")
+                                a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+                                    span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+                                    span.sr-only Previous
+                                a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+                                    span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+                                    span.sr-only Next
+                    .col-md-6.blockdiv
+                        .blockitem
+                            h3.productinfo#productName
+                            p.productinfo#productBrief
+                            p.productinfo#productTags
+                            p.productinfo#productPrice
+                            p.productinfo#productStock
+                            .row
+                                .col-xs-6.numberinput
+                                    .input-group
+                                        span.input-group-addon 数量
+                                        input.form-control#numberInput(type="number" min="1" value=1 placeholder="数量"  required)
+                            .row
+                                .col-xs-6.productbtn
+                                    a.btn.btn-success.btn-block 立即购买
+                                .col-xs-6.productbtn
+                                    a.btn.btn-default.btn-block 加入购物车
+                                        span.glyphicon.glyphicon-shopping-cart
+            .col-lg-12
+                .blockdiv
+                    .blockitem
+                        h1 商品描述：
+                        #productDescription.productinfo
 block javascript
     script(data-main="javascripts/product" src="javascripts/lib/require.js")

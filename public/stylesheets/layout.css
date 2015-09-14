@@ -9,6 +9,7 @@ header .navbar {
 header .navbar-default {
     border-color : #fff;
 }
+
 .navbar .navbar-toggle.toggle-left {
     float       : left;
     margin-left : 15px;
@@ -27,3 +28,8 @@ header .navbar-default {
     color        : #5e5e5e;
     margin-right : 10px;
 }
+
+.navbar-default .navbar-toggle {
+    border-color : #fff;
+}
+

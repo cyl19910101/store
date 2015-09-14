@@ -52,6 +52,13 @@ html
                     else return undefined;
                 };
 
+                var getTokenLevel = function () {
+                    var profile = getPayload();
+                    if (profile)
+                        return getProfile().level;
+                    else return undefined;
+                };
+
                 var decodeJWT = function (str) {
                     return decodeURIComponent(escape(window.atob(str)));
                 }
@@ -90,7 +97,8 @@ html
                     isAuthenticated: isAuthenticated,
                     getTokenUser   : getTokenUser,
                     configToken    : configToken,
-                    getTokenRole   : getTokenRole
+                    getTokenRole   : getTokenRole,
+                    getTokenLevel  : getTokenLevel
                 }
                 return new _authorization();
             })();
