@@ -11,7 +11,10 @@ define(function (require) {
             var i = 0;
             good.images.forEach(function (image) {
                 //li
-                var _li = $('<li class="active" data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>');
+                var _li = $('<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>');
+                if(!i) {
+                    _li.addClass('active');
+                }
 
                 //item
                 var _item = $('<div class="item"></div>');
