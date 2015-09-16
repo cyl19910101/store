@@ -1,8 +1,8 @@
 define(function (require) {
-    var $              = require('jquery');
-    var goodController = require('app/controller/goodController');
-    var _q             = require('app/util/queryURL');
-    var _p             = function () {
+    var $       = require('jquery');
+    var goodAPI = require('app/api/good');
+    var _q      = require('app/util/queryURL');
+    var _p      = function () {
     };
 
     // insert image to carousel
@@ -12,7 +12,7 @@ define(function (require) {
             good.images.forEach(function (image) {
                 //li
                 var _li = $('<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>');
-                if(!i) {
+                if (!i) {
                     _li.addClass('active');
                 }
 
@@ -64,10 +64,11 @@ define(function (require) {
             })
             $('#productTags').html(_str);
         }
-        if (good.price) {
-            //show price by level
+        if (good.salePrice) {
+            //show salePrice by level
             if (authorization.isAuthenticated()) {
-                var _priceStr = 'VIP' + authorization.getTokenLevel() + ' 优惠价：' + good.price;
+                //TODO: admin show price
+                var _priceStr = 'VIP' + authorization.getTokenLevel() + ' 优惠价：' + good.salePrice;
                 $('#productPrice').html(_priceStr);
             }
             else {
@@ -86,12 +87,8 @@ define(function (require) {
     _p.prototype = {
         init: function () {
             var goodCode = _q.QueryString.item;
-            var _url     = authorization.isAuthenticated() ? '/api/v1/vipGood/' : '/api/v1/good/';
-            _url += goodCode;
             //TODO: vip  || normal
-            $.ajax({
-                url    : _url,
-                method : "GET",
+            var callbackObj = {
                 success: function (res) {
                     if (res)
                         if (res.success) {
@@ -110,7 +107,8 @@ define(function (require) {
                 error  : function () {
                     //TODO
                 }
-            });
+            };
+            goodAPI.get(goodCode, callbackObj);
             $('.carousel').carousel({
                 interval: 5000 //changes the speed
             })

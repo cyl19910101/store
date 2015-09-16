@@ -1,6 +1,7 @@
 define(function (require) {
-    var _m                  = function () {
+    var _c = function () {
     };
+
     var good                = require('app/model/good');
     var goodController      = require('app/controller/goodController');
     var fileInputController = require('app/controller/fileInputController');
@@ -17,6 +18,6 @@ define(function (require) {
         goodController.initUI();
     };
 
-    _m.prototype = {initUI: initUI};
-    return new _m();
+    _c.prototype = {initUI: initUI};
+    return new _c();
 });

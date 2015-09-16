@@ -112,35 +112,43 @@ exports.postGood = function (req, res, next) {
  * @param res
  * @param next
  */
-//debug
 exports.getGood = function (req, res, next) {
     var code = req.params.code;
     if (code) {
-        Good.findOne({code: code}, 'name salePrice stock images tags brief code description', function (err, data) {
+        var query = '';
+        console.log(req.user);
+        if (req.user && req.user.role === 'admin') {
+            queryStr = '-_id';
+        }
+        else queryStr = '-_id name salePrice stock images tags brief code description'
+        Good.findOne({code: code}, queryStr, function (err, data) {
             if (!err) {
                 if (data) {
-                    var _data = {};
-                    //TODO: handle undefined query error
-                    if (data.name)
-                        _data.name = data.name;
-                    if (data.salePrice)
-                        _data.price = data.salePrice[0];
-                    if (data.stock)
-                        _data.stock = data.stock;
-                    //TODO: choose which picture to preview
-                    if (data.images)
-                        _data.images = data.images;
-                    if (data.brief)
-                        _data.brief = data.brief;
-                    if (data.tags)
-                        _data.tags = data.tags;
-                    if (data.description)
-                        _data.description = data.description;
-                    _data.code = data.code;
-                    res.json({success: 'success to query good', data: _data});
+                    //TODO: thin way
+                    data = data.toObject();
+                    console.log(data);
+
+                    //filter property
+                    //show different price for different people
+                    if (data.salePrice) {
+                        if (req.user) {
+                            if (req.user.role === 'customer') {
+                                var level      = req.user.level || 1;
+                                data.salePrice = data.salePrice[level - 1];
+                            } else if (req.user.role === 'admin') {
+                                //admin
+                            } else {
+                                //TODO: merchant
+                            }
+                        } else {
+                            data.salePrice = data.salePrice[0];
+                        }
+                    }
+
+                    res.json({success: 'success to query good', data: data});
                 }
                 else {
-                    res.json({error: 'no such good'});
+                    res.status(404).json({error: 'no such good'});
                 }
             }
             else {
@@ -153,112 +161,39 @@ exports.getGood = function (req, res, next) {
 
 }
 
-exports.vipGetGood = function (req, res, next) {
-    var code = req.params.code;
-    if (req.user && req.user.level) {
-        if (code) {
-            Good.findOne({code: code}, 'name salePrice stock images tags brief code description', function (err, data) {
-                if (!err) {
-                    if (data) {
-                        var _data = {};
-                        //TODO: handle undefined query error
-                        if (data.name)
-                            _data.name = data.name;
-                        if (data.salePrice)
-                            _data.price = data.salePrice[req.user.level - 1];
-                        if (data.stock)
-                            _data.stock = data.stock;
-                        //TODO: choose which picture to preview
-                        if (data.images)
-                            _data.images = data.images;
-                        if (data.brief)
-                            _data.brief = data.brief;
-                        if (data.tags)
-                            _data.tags = data.tags;
-                        if (data.description)
-                            _data.description = data.description;
-                        _data.code = data.code;
-                        res.json({success: 'success to query good', data: _data});
-                    }
-                    else {
-                        res.json({error: 'no such good'});
-                    }
-                }
-                else {
-                    res.status(500).end();
-                }
-            })
-        }
-        else
-            res.status(400).end();
-    } else {
-        res.status(401).end();
-    }
-
-}
-
 exports.index = function (req, res, next) {
     //TODO:paginate
-    Good.find({}, 'name salePrice stock images brief code', function (err, datas) {
+    //get value by role && level
+    Good.find({}, '-_id name salePrice stock images brief code', function (err, datas) {
         if (err) {
             //TODO :handel err
             res.status(500).end();
         } else {
             var _datas = [];
             datas.forEach(function (data) {
-                var _data = {};
-                //TODO: handle undefined query error
-                if (data.name)
-                    _data.name = data.name;
-                if (data.salePrice)
-                    _data.price = data.salePrice[0];
-                if (data.stock)
-                    _data.stock = data.stock;
-                //TODO: choose which picture to preview
-                if (data.images)
-                    _data.image = data.images[0];
-                if (data.brief)
-                    _data.brief = data.brief;
-                _data.code = data.code;
-                _datas.push(_data);
+                //TODO: use a thin way to do this
+                data = data.toObject();
+
+                //filter property
+                //show different price for different people
+                if (data.salePrice) {
+                    if (req.user) {
+                        if (req.user.role === 'customer') {
+                            var level      = req.user.level || 1;
+                            data.salePrice = data.salePrice[level - 1];
+                        } else if (req.user.role === 'admin') {
+                            data.salePrice = data.salePrice[9];
+                        } else {
+                            //TODO: merchant
+                        }
+                    } else {
+                        data.salePrice = data.salePrice[0];
+                    }
+                }
+
+                _datas.push(data);
             });
-            res.json({success: 'success to get vip index ', goods: _datas});
+            res.json({success: 'success to index good', goods: _datas});
         }
     });
-};
-
-
-exports.vipIndex = function (req, res, next) {
-    //TODO:paginate
-    if (req.user && req.user.level) {
-        Good.find({}, 'name salePrice stock images brief code', function (err, datas) {
-            if (err) {
-                //TODO :handel err
-                res.status(500).end();
-            } else {
-                var _datas = [];
-                datas.forEach(function (data) {
-                    var _data = {};
-                    //TODO: handle undefined query error
-                    if (data.name)
-                        _data.name = data.name;
-                    if (data.salePrice)
-                        _data.price = data.salePrice[req.user.level - 1];
-                    if (data.stock)
-                        _data.stock = data.stock;
-                    //TODO: choose which picture to preview
-                    if (data.images)
-                        _data.image = data.images[0];
-                    if (data.brief)
-                        _data.brief = data.brief;
-                    _data.code = data.code;
-                    _datas.push(_data);
-                });
-                res.json({success: 'success to get vip index ', goods: _datas});
-            }
-        });
-    }
-    else {
-        res.status(401).end();
-    }
 };

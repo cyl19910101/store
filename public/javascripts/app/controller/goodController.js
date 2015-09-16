@@ -1,6 +1,7 @@
 define(function (require) {
     var $         = require('jquery');
     var good      = require('app/model/good');
+    var goodAPI   = require('app/api/good');
     var objectKey = require('app/util/objectKey');
     var _va       = require('_va');
     var _a        = require('app/controller/ajaxTokenController');
@@ -98,20 +99,7 @@ define(function (require) {
         return true;
     };
 
-    var postGoodData = function (o) {
-        $.ajax({
-            url        : '/api/v1/good',
-            method     : 'POST',
-            data       : JSON.stringify(good),
-            contentType: 'application/json; charset=utf-8',
-            dataType   : 'json',
-            success    : o.success,
-            error      : o.error
-        });
-    };
-
     //postGood
-    //TODO:
     //1st. get good data value
     //2nd. check if the data is valid
     //3rd. if valid then send to server,
@@ -124,7 +112,7 @@ define(function (require) {
 
         if (isAValidGoodData()) {
             //send to server
-            postGoodData({
+            var callbackObj = {
                 success : function (res) {
                     //server accept this data
                     if (res.success) {
@@ -139,7 +127,8 @@ define(function (require) {
                     //unhandle error
                     //TODO:
                 }
-            });
+            };
+            goodAPI.post(good, callbackObj);
         }
     };
 
@@ -173,10 +162,10 @@ define(function (require) {
     var displayGoodPreview = function (good) {
         //TODO: use immediate instead of setTimeout
         var name  = good.name || "未添加";
-        var price = good.price || "未添加";
+        var price = good.salePrice || "未添加";
         var stock = good.stock || "未添加";
         var brief = good.brief || "未添加";
-        var image = good.image;
+        var image = good.images ? good.images[0] : undefined;
         var code  = good.code || "未添加";
 
         setTimeout(function () {
@@ -199,11 +188,11 @@ define(function (require) {
         }, 0);
     };
 
-    var queryGoodIndex = function (isVIP) {
-        $.ajax({
-            url     : isVIP ? '/api/v1/good/vipIndex' : '/api/v1/good/index',
-            method  : 'GET',
-            dataType: 'json',
+    /**
+     * TODO: show good index contains user role : admin merchant vip nologin
+     */
+    var showGoodIndex = function () {
+        var callbackObj = {
             success : function (res) {
                 if (res.success) {
                     if (res.goods) {
@@ -217,17 +206,9 @@ define(function (require) {
             }, error: function () {
                 console.log('query good vip index error');
             }
-        });
-    };
-
-    var getGoodIndex = function () {
-        if (authorization.isAuthenticated()) {
-            queryGoodIndex(1);
-        } else {
-            queryGoodIndex(0);
-        }
-
-    };
+        };
+        goodAPI.getIndex(callbackObj);
+    }
 
     var initUI = function () {
         //insertTag
@@ -258,13 +239,14 @@ define(function (require) {
 
 //exports api
     _g.prototype = {
-        insertImage : insertImage,
-        deleteImage : deleteImage,
-        insertTag   : insertTag,
-        deleteTag   : deleteTag,
-        postGood    : postGood,
-        getGoodIndex: getGoodIndex,
-        initUI      : initUI
+        insertImage  : insertImage,
+        deleteImage  : deleteImage,
+        insertTag    : insertTag,
+        deleteTag    : deleteTag,
+        postGood     : postGood,
+        showGoodIndex: showGoodIndex,
+        //getGoodIndex: getGoodIndex,
+        initUI       : initUI
     };
     return new _g();
 })

@@ -5,7 +5,7 @@ define(function (require) {
 
     _i.prototype = {
         init: function () {
-            goodController.getGoodIndex();
+            goodController.showGoodIndex();
         }
     }
 
