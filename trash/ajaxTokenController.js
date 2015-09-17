@@ -1,5 +1,6 @@
 define(function (require) {
-    var $             = require('jquery');
+    var $ = require('jquery');
+
     var initAjaxToken = function () {
         $.ajaxSetup({
             'beforeSend': function (xhr) {

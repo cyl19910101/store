@@ -3,5 +3,5 @@ exports.index = function (req, res, next) {
 }
 
 exports.product = function (req, res, next) {
-    res.render('shopping/product');
+    res.render('product');
 }

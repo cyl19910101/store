@@ -3,17 +3,17 @@
  * init shard content : account area, ajax token, sidebar
  */
 define(function (require) {
-    var ajaxTokenController   = require('app/controller/ajaxTokenController');
-    var sidebarController     = require('app/controller/sidebarController');
-    var accountAreaController = require('app/controller/accountAreaController');
+    var ajaxAuthorizationConfiguration = require('app/util/ajaxAuthorizationConfiguration');
+    var sidebarController              = require('app/controller/sidebarController');
+    var accountAreaController          = require('app/controller/accountAreaController');
     require('_BS');
 
-    var _s                    = function () {
+    var _s = function () {
     };
 
     _s.prototype = {
         init: function () {
-            ajaxTokenController.initAjaxToken();
+            ajaxAuthorizationConfiguration.initAjaxToken();
             sidebarController.initSidebarToggle();
             accountAreaController.initAccountAreaUI();
         }

@@ -1,14 +1,24 @@
 define(function (require) {
-    var _f_i           = function () {
+    var _f_i = function () {
     };
-    var $              = require('jquery');
+    var $    = require('jquery');
     require('_BS');
     require('_BS_OFF');
     require('_BS_FI_INPUT');
     require('_BS_FI_INPUT_LAN');
-    var good           = require('app/model/good');
-    var goodController = require('app/controller/goodController');
-    var initFileInput  = function () {
+    var good = require('app/model/good');
+
+    //images
+    var imageList = {};
+
+    var insertImage = function (key) {
+        imageList[key] = 1;
+    };
+
+    var deleteImage   = function (key) {
+        delete imageList[key];
+    };
+    var initFileInput = function () {
         $("#input-id").fileinput({
             language             : "zh",
             uploadUrl            : "/api/v1/picture",
@@ -37,18 +47,21 @@ define(function (require) {
         });
 
         $('#input-id').on('filedeleted', function (event, key) {
-            goodController.deleteImage(key);
+            deleteImage(key);
         });
 
         $('#input-id').on('fileuploaded', function (event, data, previewId, index) {
             var response = data.response;
             response.initialPreviewConfig.forEach(function (config) {
                 var key = config.key;
-                goodController.insertImage(key);
+                insertImage(key);
             })
         });
     };
 
-    _f_i.prototype = {initFileInput: initFileInput};
+    _f_i.prototype = {
+        initFileInput: initFileInput,
+        imageList    : imageList
+    };
     return new _f_i();
 });
