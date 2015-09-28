@@ -1,15 +1,17 @@
-var express    = require('express');
-var router     = express.Router();
-var expressJwt = require('express-jwt'); //https://npmjs.org/package/express-jwt
+var express           = require( 'express' );
+var router            = express.Router();
+var expressJwt        = require( 'express-jwt' );
+var tokenController   = require( './api/v1/token' );
+var pictureController = require( './api/v1/picture' );
+var goodController    = require( './api/v1/good' );
+var finanseController = require( './api/v1/finanse' );
+var userController    = require( './api/v1/user' );
+var test              = require( './api/v1/test' );
+var fs                = require( 'fs' );
+var path              = require( 'path' );
+var key               = require( './util/privateKey' );
 
-var tokenController   = require('./api/v1/token');
-var pictureController = require('./api/v1/picture');
-var goodController    = require('./api/v1/good');
-var finanseController = require('./api/v1/finanse');
-var userController    = require('./api/v1/user');
-var test              = require('./api/v1/test')
-var secret            = tokenController.secretKey;
-var _ejwt             = expressJwt({secret: secret});
+var _ejwt = expressJwt( { secret : key } );
 
 /**
  * check if client have token
@@ -19,35 +21,37 @@ var _ejwt             = expressJwt({secret: secret});
  * @param res
  * @param next
  */
-var isLogin    = function (req, res, next) {
-    req.headers.authorization ? _ejwt(req, res, next) : next();
+var isLogin    = function ( req, res, next ) {
+    req.headers.authorization ? _ejwt( req, res, next ) : next();
 };
 
 //create token
-router.post('/accesstokens', tokenController.createToken);
+router.post( '/accessToken', tokenController.createToken );
+router.delete( '/accessToken', _ejwt, tokenController.destroyToken );
 
 //picture operation
-router.post('/picture', _ejwt, pictureController.reqFileParser, pictureController.postPicture);
+router.post( '/picture', _ejwt, pictureController.reqFileParser, pictureController.postPicture );
 
-router.delete('/picture', _ejwt, pictureController.deletePicture);
+router.delete( '/picture', _ejwt, pictureController.deletePicture );
 
 //END picture operation
 
 //good operation
 //TODO: admin merchant query good, use tha same uri
-router.get('/good/index', isLogin, goodController.index);
+//TODO: also can use an array, if login use [_ejwt, otherhandler], else use [otherhandler]
+router.get( '/good/index', isLogin, goodController.index );
 //router.get('/good/vipIndex', _ejwt, goodController.vipIndex);
-router.get('/good/:code', isLogin, goodController.getGood);
+router.get( '/good/:code', isLogin, goodController.getGood );
 //router.get('/vipGood/:code', _ejwt, goodController.vipGetGood);
 
-router.post('/good', _ejwt, goodController.postGood);
+router.post( '/good', _ejwt, goodController.postGood );
 
-router.get('/RMBExchangeRate', _ejwt, finanseController.getRMBExchangeRate);
+router.get( '/RMBExchangeRate', _ejwt, finanseController.getRMBExchangeRate );
 // END good operation
 
 /**
  * user operation
  */
 //post user -- register
-router.post('/user', userController.postUser);
+router.post( '/user', userController.postUser );
 module.exports = router;

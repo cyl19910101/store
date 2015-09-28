@@ -3,6 +3,8 @@
  * defined html element representation when get a valid or invalid value
  */
 define(function () {
+    "use strict";
+
     var _b = function () {
     };
 

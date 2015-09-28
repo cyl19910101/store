@@ -2,6 +2,8 @@
  * Created by cyl on 10/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var _va = require('validator');
 
     //is name : length >= 2 <= 7

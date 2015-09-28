@@ -2,6 +2,8 @@
  * Created by cyl on 15/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var goodAPI = require('app/api/good');
     var _c      = function () {
     };

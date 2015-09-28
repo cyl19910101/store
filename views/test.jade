@@ -1,5 +1,13 @@
-extends layout
-block content
-    a.btn.btn-default#getbtn get
-block javascript
-    script(data-main="javascripts/test" src="javascripts/lib/require.js")
+doctype html
+html
+    head
+        link(rel="stylesheet" type="text/css" href="css/test.css")
+    body
+        p me
+        script.
+            (function () {
+                var vvv = 'can you see me?';
+                setTimeout(function () {
+                    console.log('here');
+                }, 0);
+            }());

@@ -1,7 +1,10 @@
 define(function (require) {
+    "use strict";
+
     var $       = require('jquery');
     var good    = require('app/model/good');
     var goodAPI = require('app/api/good');
+    var ticker  = require('lib/setImmediate');
     var _i      = function () {
     };
 
@@ -29,7 +32,6 @@ define(function (require) {
     };
 
     var displayGoodPreview = function (good) {
-        //TODO: use immediate instead of setTimeout
         var name  = good.name || "未添加";
         var price = good.salePrice || "未添加";
         var stock = good.stock || "未添加";
@@ -37,7 +39,7 @@ define(function (require) {
         var image = good.images ? good.images[0] : undefined;
         var code  = good.code || "未添加";
 
-        setTimeout(function () {
+        ticker.setImmediate(function () {
             var frame     = $(goodPreviewFrameHTML);
             var thumbnail = $(goodPreviewThumbnailHTML);
             //image ui
@@ -49,7 +51,7 @@ define(function (require) {
 
             frame.append(thumbnail);
             $('#goods').append(frame);
-        }, 0);
+        });
     };
 
     /**

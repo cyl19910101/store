@@ -1,22 +1,24 @@
-var mongoose      = require('mongoose');
+var mongoose      = require( 'mongoose' );
 var Schema        = mongoose.Schema;
-var AddressSchema = require('./address').AddressSchema;
-var OrderSchema   = require('./order').OrderSchema;
-var CartSchema    = require('./cart').CartSchema;
+var AddressSchema = require( './address' ).AddressSchema;
+var OrderSchema   = require( './order' ).OrderSchema;
+var CartSchema    = require( './cart' ).CartSchema;
 
-var UserSchema = new Schema({
-    username : {type: String, required: true, unique: true},
-    name     : {type: String},
-    password : {type: String, required: true},
-    status   : {type: String, enum: ['deactivate', 'normal', 'freeze'], required: true},
-    email    : {type: String, required: true, unique: true},
-    level    : {type: Number, min: 1, max: 10, required: true},
-    role     : {type: String, enum: ['admin', 'customer', 'merchant']},
-    phone    : {type: String},
-    birthday : {type: Date},
-    addresses: [AddressSchema],
-    cart     : [CartSchema],
-    orders   : [OrderSchema]
-});
+var UserSchema = new Schema( {
+    username   : { type : String, required : true, unique : true },
+    name       : { type : String },
+    password   : { type : String, required : true },
+    status     : { type : String, enum : ['deactivate', 'normal', 'freeze'], required : true },
+    //TODO: use verifyCode to activate account
+    //verifyCode : { type : String },
+    email      : { type : String, required : true, unique : true },
+    level      : { type : Number, min : 1, max : 10, required : true },
+    role       : { type : String, enum : ['admin', 'customer', 'merchant'] },
+    phone      : { type : String },
+    birthday   : { type : Date },
+    addresses  : [AddressSchema],
+    cart       : [CartSchema],
+    orders     : [OrderSchema]
+} );
 
-mongoose.model('User', UserSchema);
+mongoose.model( 'User', UserSchema );

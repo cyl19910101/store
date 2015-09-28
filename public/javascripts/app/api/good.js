@@ -2,6 +2,8 @@
  * Created by cyl on 15/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var $ = require('jquery');
 
     //TODO: add more search function
@@ -12,7 +14,7 @@ define(function (require) {
             success: callbackObj.success,
             error  : callbackObj.error
         });
-    }
+    };
 
     /**
      * post good to server

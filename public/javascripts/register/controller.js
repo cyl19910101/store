@@ -2,6 +2,8 @@
  * Created by cyl on 7/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var $                 = require('jquery');
     var Sha256            = require('lib/sha256');
     var user              = require('app/model/user');

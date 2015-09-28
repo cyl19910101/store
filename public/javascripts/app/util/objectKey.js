@@ -1,6 +1,8 @@
 /**
  * Created by cyl on 8/09/15.
  */
+"use strict";
+
 define({
     getObjectKeys: function (obj) {
         var res  = [];

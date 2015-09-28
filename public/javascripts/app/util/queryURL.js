@@ -1,3 +1,5 @@
+"use strict";
+
 define({
     QueryString: function () {
         // This function is anonymous, is executed immediately and

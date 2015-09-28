@@ -6,9 +6,9 @@
     }
 
     var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
+    var tasksByHandle         = {};
     var currentlyRunningATask = false;
-    var doc = global.document;
+    var doc                   = global.document;
     var setImmediate;
 
     function addFromSetImmediateArguments(args) {
@@ -20,7 +20,7 @@
     // returns a function that requires no arguments.
     function partiallyApplied(handler) {
         var args = [].slice.call(arguments, 1);
-        return function() {
+        return function () {
             if (typeof handler === "function") {
                 handler.apply(undefined, args);
             } else {
@@ -55,7 +55,7 @@
     }
 
     function installNextTickImplementation() {
-        setImmediate = function() {
+        setImmediate = function () {
             var handle = addFromSetImmediateArguments(arguments);
             process.nextTick(partiallyApplied(runIfPresent, handle));
             return handle;
@@ -67,12 +67,12 @@
         // where `global.postMessage` means something completely different and can't be used for this purpose.
         if (global.postMessage && !global.importScripts) {
             var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
+            var oldOnMessage              = global.onmessage;
+            global.onmessage              = function () {
                 postMessageIsAsynchronous = false;
             };
             global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
+            global.onmessage              = oldOnMessage;
             return postMessageIsAsynchronous;
         }
     }
@@ -82,8 +82,8 @@
         // * https://developer.mozilla.org/en/DOM/window.postMessage
         // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
 
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
+        var messagePrefix   = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function (event) {
             if (event.source === global &&
                 typeof event.data === "string" &&
                 event.data.indexOf(messagePrefix) === 0) {
@@ -97,7 +97,7 @@
             global.attachEvent("onmessage", onGlobalMessage);
         }
 
-        setImmediate = function() {
+        setImmediate = function () {
             var handle = addFromSetImmediateArguments(arguments);
             global.postMessage(messagePrefix + handle, "*");
             return handle;
@@ -105,13 +105,13 @@
     }
 
     function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
+        var channel             = new MessageChannel();
+        channel.port1.onmessage = function (event) {
             var handle = event.data;
             runIfPresent(handle);
         };
 
-        setImmediate = function() {
+        setImmediate = function () {
             var handle = addFromSetImmediateArguments(arguments);
             channel.port2.postMessage(handle);
             return handle;
@@ -119,17 +119,17 @@
     }
 
     function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        setImmediate = function() {
+        var html     = doc.documentElement;
+        setImmediate = function () {
             var handle = addFromSetImmediateArguments(arguments);
             // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
             // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
+            var script                = doc.createElement("script");
             script.onreadystatechange = function () {
                 runIfPresent(handle);
                 script.onreadystatechange = null;
                 html.removeChild(script);
-                script = null;
+                script                    = null;
             };
             html.appendChild(script);
             return handle;
@@ -137,7 +137,7 @@
     }
 
     function installSetTimeoutImplementation() {
-        setImmediate = function() {
+        setImmediate = function () {
             var handle = addFromSetImmediateArguments(arguments);
             setTimeout(partiallyApplied(runIfPresent, handle), 0);
             return handle;
@@ -146,7 +146,7 @@
 
     // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
     var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+    attachTo     = attachTo && attachTo.setTimeout ? attachTo : global;
 
     // Don't get fooled by e.g. browserify environments.
     if ({}.toString.call(global.process) === "[object process]") {
@@ -170,6 +170,19 @@
         installSetTimeoutImplementation();
     }
 
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
+    var _o = {
+        setImmediate  : setImmediate,
+        clearImmediate: clearImmediate
+    };
+
+    if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
+        module.exports = _o;
+    } else if (typeof define === 'function' && typeof define.amd === 'object') {
+        define([], function () {
+            return _o;
+        });
+    } else {
+        attachTo.setImmediate   = setImmediate;
+        attachTo.clearImmediate = clearImmediate;
+    }
 }(new Function("return this")()));

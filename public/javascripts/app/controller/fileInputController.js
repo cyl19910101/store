@@ -1,4 +1,6 @@
 define(function (require) {
+    "use strict";
+
     var _f_i = function () {
     };
     var $    = require('jquery');

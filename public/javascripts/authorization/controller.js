@@ -2,6 +2,8 @@
  * Created by cyl on 7/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var $                 = require('jquery');
     var Sha256            = require('lib/sha256');
     var user              = require('app/model/user');
@@ -24,7 +26,7 @@ define(function (require) {
             // TODO: check if it's a valid value
 
             $.ajax({
-                url     : '/api/v1/accesstokens',
+                url     : '/api/v1/accessToken',
                 method  : 'POST',
                 data    : {
                     username: username,

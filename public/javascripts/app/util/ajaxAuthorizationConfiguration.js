@@ -2,6 +2,8 @@
  * Created by cyl on 17/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var $ = require('jquery');
 
     var initAjaxToken = function () {

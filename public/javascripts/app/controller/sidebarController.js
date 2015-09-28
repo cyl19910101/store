@@ -1,4 +1,5 @@
 define(['jquery', '_MENU'], function ($, _MENU) {
+    "use strict";
 
     var initSidebarToggle = function () {
         $('#b_t').click(function (e) {

@@ -2,6 +2,8 @@
  * Created by cyl on 7/09/15.
  */
 define(function (require) {
+    "use strict";
+
     var _u = function () {
     };
 

@@ -144,7 +144,6 @@ exports.getGood = function (req, res, next) {
                             data.salePrice = data.salePrice[0];
                         }
                     }
-
                     res.json({success: 'success to query good', data: data});
                 }
                 else {
@@ -153,6 +152,7 @@ exports.getGood = function (req, res, next) {
             }
             else {
                 res.status(500).end();
+                next(err);
             }
         })
     }

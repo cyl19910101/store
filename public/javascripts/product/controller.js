@@ -1,4 +1,6 @@
 define(function (require) {
+    "use strict";
+
     var $       = require('jquery');
     var goodAPI = require('app/api/good');
     var _q      = require('app/util/queryURL');

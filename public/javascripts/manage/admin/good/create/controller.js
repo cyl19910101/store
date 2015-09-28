@@ -1,4 +1,5 @@
 define(function (require) {
+    "use strict";
 
     var goodAPI             = require('app/api/good');
     var good                = require('app/model/good');
@@ -14,6 +15,27 @@ define(function (require) {
         if (!name || goodTags[name]) return;
         var tag        = $('<button type="button" class="btn btn-default btn-tag">' + name + '</button>');
         $('#currentLabel').append(tag);
+
+        tag.on('touchstart', function () {
+            $('#goodDescriptionTextarea').html($('#goodDescriptionTextarea').html + 'touchstart');
+        });
+
+        tag.on('touchend', function () {
+            $('#goodDescriptionTextarea').html($('#goodDescriptionTextarea').html + 'touchend');
+        });
+
+        tag.on('touchcancel', function () {
+            $('#goodDescriptionTextarea').html($('#goodDescriptionTextarea').html + 'touchcancel');
+        });
+
+        tag.on('touchleave', function () {
+            $('#goodDescriptionTextarea').html($('#goodDescriptionTextarea').html + 'touchleave');
+        });
+
+        tag.on('touchmove', function () {
+            $('#goodDescriptionTextarea').html($('#goodDescriptionTextarea').html + 'touchmove');
+        });
+
         tag.click(function () {
             deleteTag(tag, name);
         });
